@@ -11,11 +11,11 @@ module.exports = (app)->
 
 		@electionBrowse = (req, res)->
 			res.render 'public/election',
-				title: 'Elections',
+				title: 'Elections'
 				elections: testElections
 
 testElections = [
-	{ name: "2016 Presidential Election", level: "federal" },
+	{ name: "2016 Presidential Election", level: "federal" }
 	{ name: "2015 Normaltown Mayoral", level: "local" }
 ]
 
