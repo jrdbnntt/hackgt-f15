@@ -1,0 +1,25 @@
+extend ../layout
+
+// block localJS
+	// script(type='text/javascriot' src='/js/public/signin.js')
+
+block content
+	p Look at the signup page!
+
+	form.form-horizontal
+		fieldset
+			legend Sign Up
+
+			.control-group
+				label.form-control(for='email') Email
+				.controls
+					input(type='email' name='email' required)
+
+			.control-group
+				label.form-control(for='email') Password
+				.controls
+					input(type='password' name='password' required)
+
+			.control-group
+				.controls
+					button.btn(type='submit') Sign up

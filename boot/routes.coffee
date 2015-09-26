@@ -12,7 +12,7 @@ module.exports = (app)->
 		extended: false
 
 	# Enforce the ACL
-	app.use acl
+	# app.use acl
 
 	###########################################################
 	# Public pages
@@ -24,10 +24,10 @@ module.exports = (app)->
 
 	# Candidate Signin
 	app.get '/signin', app.PublicController.signin
-	# app.post '/signin', jsonParser, app.PublicController.signin_submit
+	app.post '/signin', jsonParser, app.PublicController.signin_submit
 
 	# Candidate Signup
-	# app.get '/signup', app.PublicController.signup
+	app.get '/signup', app.PublicController.signup
 	# app.post '/signup', urlencodedParser, app.PublicController.signup_submit
 
 
@@ -65,11 +65,11 @@ module.exports = (app)->
 	# app.get '/user/signout', app.UserController.signout
 
 	# Edit Profile
-	# app.get '/user/edit/profile', app.UserController.editProfile
+	app.get '/user/edit/profile', app.UserController.editProfile
 	# app.post '/user/edit/profile', jsonParser, app.UserController.editProfile_submit
 
 	# Answer Questions
-	# app.get '/user/questions', app.UserController.questions
+	app.get '/user/questions', app.UserController.questions
 	# app.post '/user/questions', jsonParser, app.UserController.questions_submit
 
 
