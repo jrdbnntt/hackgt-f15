@@ -14,12 +14,12 @@ table =
 module.exports = (app)->
 	class app.models.User
 		
-		@create = (data)->
+		@create = (email, password, roleId = 0)->
 			dfd = app.Q.defer()
 			
 			# Hash password
 			app.bcrypt.genSalt 10, (err, salt)->
-				app.bcrypt.hash data.password, salt, (err, hash)->
+				app.bcrypt.hash password, salt, (err, hash)->
 					
 					# Save new user
 					con = app.db.newCon()
@@ -30,8 +30,8 @@ module.exports = (app)->
 						table.col.email
 						table.col.password
 						
-						(data.roleId || 0)
-						data.email
+						roleId
+						email
 						hash
 					]
 					.on 'error', (err)->
