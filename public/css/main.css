@@ -113,7 +113,6 @@ footer {
   font-size: 80%;
 }
 
-<<<<<<< HEAD
 .login-block button {
     width: 100%;
     height: 40px;
@@ -132,15 +131,27 @@ footer {
 
 .login-block button:hover {
     background: #ff7b81;
-=======
+
 /*Specific to Election page*/
+.headertext {
+  color: #fff;
+  font-size: 21pt;
+  margin: 1em auto; 
+  font-family: Montserrat, Lato, Arial, sans-serif;
+}
 .election {
   margin-bottom: 50px;
   font-size: 1.5em;
 }
+.election:hover {
+  transition: background-color 0.5s ease;
+  background-color: #d11d1d;
+}
 .election .date {
-  font-size: 50%;
->>>>>>> f189ff93193f582897468e58001c79c7755ad1d4
+  font-size: 1em;
+  color: #fff;
+  background-color: #0E2B49;
+  margin: -1.5em -1.5em 0 -1.5em;
 }
 
 

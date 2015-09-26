@@ -14,16 +14,18 @@ table =
 module.exports = (app)->
 	class app.models.User
 		
-		@create = (email, password, roleId = 0)->
+		@create: (data)->
 			dfd = app.Q.defer()
 			
 			# Hash password
 			app.bcrypt.genSalt 10, (err, salt)->
-				app.bcrypt.hash password, salt, (err, hash)->
+				app.bcrypt.hash data.password, salt, (err, hash)->
+					userId = null
+					qcnt = 0
 					
 					# Save new user
-					con = app.db.newCon()
-					con.query 'INSERT INTO ? (?,?,?) VALUES (?,?,?)', [
+					con = app.db.newMultiCon()
+					con.query 'INSERT INTO ? (?,?,?) VALUES (?,?,?); SELECT LAST_INSERT_ID() AS userId;', [
 						table.name
 						
 						table.col.roleId
@@ -34,16 +36,21 @@ module.exports = (app)->
 						email
 						hash
 					]
+					.on 'result', (res)->
+						++qcnt
+						res.on 'row', (row)->
+							if qcnt == 2
+								userId = parseInt row.userId
 					.on 'error', (err)->
 						console.log('DB ERR: ' + table.name + ' create');
-						dfd.reject()
+						dfd.reject err
 					.on 'end', ()->
-						dfd.resolve()
+						dfd.resolve userId
 					con.end()
 					
 			return dfd.promise
 		
-		@checkSignin = (email, password)->
+		@checkSignin: (email, password)->
 			dfd = app.Q.defer()
 			userData = null
 			storedPassword = null
@@ -89,4 +96,18 @@ module.exports = (app)->
 				
 			return dfd.promise
 			
+		@genFileName: (original)->
+			original = original.replace(/\s/g,'_').replace(/[\W[^.]]/ig,'-')
+			if original.length > 15
+				original = original.substr original.length - 15
+			
+			rand = '' + Math.random().toString(32).substr(2) + 
+				Math.random().toString(32).substr(2) + 
+				Math.random().toString(32).substr(2) + 
+				original.split("").reverse().join("").substr(0,20).split("").reverse().join("")
+				
+			if rand.length > 100
+				start = rand.length - 100
+				rand = rand.substr start
+			return rand
 			

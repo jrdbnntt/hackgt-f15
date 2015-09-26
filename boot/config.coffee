@@ -11,6 +11,8 @@ session = require 'express-session'
 dotenv = require 'dotenv'
 bcrypt = require 'bcrypt'
 Mariasql = require 'mariasql'
+formidable = require 'formidable'
+fs = require 'fs-extra'
 
 # Local lib
 autoload = require '../lib/autoload'
@@ -21,16 +23,24 @@ module.exports = (app)->
 	app.util = util
 	app.path = path
 	app.bcrypt = bcrypt
+	app.formidable = formidable
+	app.fs = fs
+	
+	
+	app.dirs = {}
+	app.dirs.base =  app.path.resolve __dirname + '/..'
+	app.dirs.static = app.dirs.base + '/public'
+	app.dirs.views = app.dirs.base + '/app/views'
 		
 	# Setup project
 	dotenv.load()
 	app.env = process.env
 	
 	app.set 'port', app.env.PORT || 5000 
-	app.set 'views', app.path.resolve __dirname + '/../app/views'
+	app.set 'views', app.dirs.views
 	app.set 'view engine', 'jade'
 	app.locals.pretty = true
-	app.use app.express.static app.path.resolve __dirname + '/../public'
+	app.use app.express.static app.dirs.static
 	
 	app.use morgan 'dev'
 	
@@ -69,7 +79,22 @@ module.exports = (app)->
 				else
 					# console.log '> DB: Connection closed with old threadId ' + this.tId + ' without error'
 			return con
-	
+	app.db.newMultiCon = ()->
+			config = app.db.setup
+			config.multiStatements = true
+			con = new app.db.Client()
+			con.connect config
+			con.on 'connect', ()->
+				this.tId = this.threadId #so it isnt deleted
+				# console.log '> DB: New connection established with threadId ' + this.tId
+			.on 'error', (err)->
+				console.log '> DB: Error on threadId ' + this.tId + '= ' + err
+			.on 'close', (hadError)->
+				if hadError
+					console.log '> DB: Connection closed with old threadId ' + this.tId + ' WITH ERROR!'
+				else
+					# console.log '> DB: Connection closed with old threadId ' + this.tId + ' without error'
+			return con
 	
 	# Load app into project
 	app.models = {}
