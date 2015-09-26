@@ -12,6 +12,20 @@ block content
 			legend Sign Up
 
 			.control-group
+				label.form-control(for='') Full Name
+				.controls
+					input(type='text' name='name' required)
+
+			.control-group
+				label.form-control(for='email') Photo
+				.controls
+					input(type='file' name='photo' required)
+
+			.control-group
+				label.form-control(for='') Autobiography
+				.controls
+					input(textarea rows="5" cols="15" required)
+			.control-group
 				label.form-control(for='email') Email
 				.controls
 					input(type='email' name='email' required)
@@ -22,8 +36,17 @@ block content
 					input(type='password' name='password' required)
 
 			.control-group
+				label.form-control(for='') Date of birth
 				.controls
-					button.btn(type='submit') Sign up
+					input(type='date' name='date' required)
 
-
-
+			.control-group
+				label.form-control Political Party
+				.controls
+					select(name='party')
+						option(value='-1') Add new party...
+						for party in parties
+							option(value=party.id)= party.name
+			.control-group
+				.controls
+					button.btn(type='submit') Sign Ups
