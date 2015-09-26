@@ -114,12 +114,24 @@ footer {
 }
 
 /*Specific to Election page*/
+.headertext {
+  color: #fff;
+  font-size: 21pt;
+  margin: 1em auto; 
+  font-family: Montserrat, Lato, Arial, sans-serif;
+}
 .election {
   margin-bottom: 50px;
   font-size: 1.5em;
 }
+.election:hover {
+  transition: background-color 0.5s ease;
+  background-color: #d11d1d;
+}
 .election .date {
-  font-size: 50%;
+  font-size: 1em;
+  color: #000;
+  margin-top: -1em;
 }
 
 

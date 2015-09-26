@@ -1,8 +1,12 @@
 extend ../indexlayout
 
+
+
 block content
-	p Look at all these elections!
 	.container
+		h1(class="headertext slideInLeft")
+			p Showing elections for #{zipcode}
+
 		each election in elections
 			div(class="flatbox container election")
 				p(class="date") August 14, 2020
