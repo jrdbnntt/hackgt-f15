@@ -10,6 +10,11 @@ module.exports = (app)->
 				title: 'Home'
 				zipCode: req.session.zipCode
 
+		@index_submit: (req, res)->
+			req.session.zipCode = req.body.zipCode
+
+			res.send {}
+
 		@candidateBrowse: (req, res)->
 			testCandidates = [
 				{ name: "John Doe", election: "2016 Presidential Election" }
@@ -35,10 +40,9 @@ module.exports = (app)->
 				title: 'Sign In'
 
 		@signin_submit: (req, res)->
-			if !req.body.email? ||
-			!req.body.password?
+			if !req.body.email? || !req.body.password?
 				res.send
-					error: 'Invalid params'
+					error: 'No email or password'
 				return
 			
 			app.models.User.checkSignin req.body.email, req.body.password
@@ -57,6 +61,16 @@ module.exports = (app)->
 				title: 'Sign Up'
 
 		@signup_submit: (req, res)->
-			req.session.zipCode = req.body.zipCode
+			if !req.body.email? || !req.body.password?
+				res.send
+					error: 'No email or password'
+				return
 
-			res.send {}
+			app.models.User.create req.body.email, req.body.password, req.body.roleId
+			.then (userData)->
+				console.log 'User creation success: ' + userData.email
+
+				res.send {}
+			, (err)->
+				res.send
+					error: err
