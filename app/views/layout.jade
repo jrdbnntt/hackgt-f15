@@ -1,0 +1,29 @@
+block vars
+
+doctype html
+html
+	head
+		title= 'VoteBoat' + (title? ' | ' + title : '')
+		
+		//- Global CSS
+		link(rel='stylesheet', type='text/css', href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
+		link(rel='stylesheet' type='text/css' href='/css/main.css')
+		
+		block localCSS
+		
+	body
+		//- Global Header
+		
+		//- Body
+		.container
+			block content
+		
+		//- Global Footer
+		
+		
+		//- Global JavaScript
+		script(type="text/javascript", src='/bower_components/jquery/dist/jquery.min.js')
+		script(type="text/javascript", src='/bower_components/bootstrap/dist/js/bootstrap.min.js')
+		script(type='text/javascript' src='/js/main.js')
+			
+		block localJS
