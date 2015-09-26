@@ -32,8 +32,8 @@ module.exports = (app)->
 						table.col.email
 						table.col.password
 						
-						(data.roleId || 0)
-						data.email
+						roleId
+						email
 						hash
 					]
 					.on 'result', (res)->

@@ -8,6 +8,7 @@ html
 		//- Global CSS
 		link(rel='stylesheet', type='text/css', href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
 		link(rel='stylesheet' type='text/css' href='/css/main.css')
+		link(rel='shortcut icon' type='image/x-icon' href='/images/favicon.ico')
 		
 		block localCSS
 		
@@ -15,13 +16,22 @@ html
 		//- Global Header
 		header
 			.container
-				h1(class="col-xs-12 col-sm-2")
+				h1(class="col-xs-12 col-sm-8")
 					img(src="images/logo.png")
-				nav(class="col-xs-12 col-sm-10")
-					a(href="") thing
+				.search
+					p Search For More Elections:
+						input(type="text" class="zip_input")
+				
 
 
 		//- Body
+		div(class="navwrapper")
+			nav(class="container")
+				a(href="") Election Info
+				a(href="") Candidates
+				a(href="") Referendums
+				a(href="") Thing
+
 		div(class='container-fluid main')
 			.container
 				block content

@@ -8,6 +8,12 @@ module.exports = (app)->
 		@index: (req, res)->
 			res.render 'index',
 				title: 'Home'
+				zipCode: req.session.zipCode
+
+		@index_submit: (req, res)->
+			req.session.zipCode = req.body.zipCode
+
+			res.send {}
 
 		@candidateBrowse: (req, res)->
 			testCandidates = [
@@ -34,10 +40,9 @@ module.exports = (app)->
 				title: 'Sign In'
 
 		@signin_submit: (req, res)->
-			if !req.body.email? ||
-			!req.body.password?
+			if !req.body.email? || !req.body.password?
 				res.send
-					error: 'Invalid params'
+					error: 'No email or password'
 				return
 			
 			app.models.User.checkSignin req.body.email, req.body.password
@@ -125,4 +130,3 @@ module.exports = (app)->
 							error: err
 					
 					
-				
