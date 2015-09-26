@@ -24,6 +24,7 @@ module.exports = (app)->
 	app.set 'port', app.env.PORT || 5000 
 	app.set 'views', app.path.resolve __dirname + '/../app/views'
 	app.set 'view engine', 'jade'
+	app.locals.pretty = true
 	app.use app.express.static app.path.resolve __dirname + '/../public'
 	
 	app.use morgan 'dev'
