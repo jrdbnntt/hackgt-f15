@@ -46,7 +46,6 @@ nav {
   vertical-align: middle;
   height: inherit;
   height: 50px;
-  background-color: #334c66;
 }
 nav a {
   display: inline-block;
@@ -97,12 +96,12 @@ footer {
 /*Other styles*/
 .flatbox {
   font-family: "Open Sans", Lato, Arial, sans-serif;
-  width: 20em;
+  width: 60%;
   background-color: #59a7f9;
-  padding: 1.5em;
   color: #fff;
   font-size: 200%;
   font-weight: bold;
+  padding: 1.5em;
 }
 .flatbox input[type="button"] {
   border: none;
@@ -114,6 +113,14 @@ footer {
   font-size: 80%;
 }
 
+/*Specific to Election page*/
+.election {
+  margin-bottom: 50px;
+  font-size: 1.5em;
+}
+.election .date {
+  font-size: 50%;
+}
 
 
 /*Specific to Index*/
