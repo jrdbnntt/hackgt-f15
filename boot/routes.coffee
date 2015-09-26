@@ -51,7 +51,7 @@ module.exports = (app)->
 
 
 	# Candidate Browser
-	# app.get '/candidate', app.PublicController.candidateBrowse
+	app.get '/candidate', app.PublicController.candidateBrowse
 
 	# Candidate View for single one
 	# app.get '/candidate/:candidateId', app.PublicController.candidateView
