@@ -1,0 +1,10 @@
+extend ../layout
+//- block vars
+//- block localCSS
+//- block localJS
+
+block content
+	p Look at all my user data!
+	ul
+		each value, key in candidate
+			li #{key}: #{value}

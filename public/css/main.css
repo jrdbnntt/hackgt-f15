@@ -1,80 +1,119 @@
 /* Colors:
 Dark Blue: #0E2B49
-Sky blue: #59C1F9
+Sky blue: #59a7f9
 Red: #d11d1d
 Off-white: #F9F8F4
 Gray: #b7b6c2
+Grayish dark blue: #334c66;
  */
 
 
-@import url(https://fonts.googleapis.com/css?family=Lato|Open+Sans);
+@import url(https://fonts.googleapis.com/css?family=Lato|Open+Sans|Montserrat);
 
 body {
-	background-color: #0e2b49;
-	margin: 0px;
+  background-color: #0e2b49;
+  margin: 0px;
+  font-family: "Open Sans", Lato, Arial, sans-serif;
 }
+
+/*Header*/
 header {
-	padding-top: 2em;
-	padding-bottom: 2em;
-	background-color: #0e2b49;
-	color: #F9F8F4;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  background-color: #0e2b49;
+  color: #F9F8F4;
 }
+
+/*Logo*/
 header h1 {
-	display: inline-block;
-	height: inherit;
-	color: #F9F8F4;
-	font-size: 39px;
+  display: inline-block;
+  height: inherit;
+  color: #F9F8F4;
+  font-size: 39px;
 }
 header h1 img {
-	max-width: 100%;
+  max-width: 100%;
+}
+
+/*Navigation*/
+.navwrapper {
+  background-color: #334c66;
+  width: 100%;
+  text-align: center;
 }
 nav {
-	display: inline-block;
-	vertical-align: middle;
-	height: inherit;
-	height: 50px;
-	background-color: #F9F8F4;
-	border-radius: 10px;
+  display: inline-block;
+  vertical-align: middle;
+  height: inherit;
+  height: 50px;
 }
 nav a {
-	display: inline-block;
-	line-height: 50px;
-	list-style: none;
-	width: 25%;
-	font-family: Georgia, "Times New Roman", serif;
-	color: #000;
-	text-align: center;
-	font-size: 17px;
-	margin: 0px;
-	transition: background-color 0.5s ease;
+  display: inline-block;
+  line-height: 50px;
+  list-style: none;
+  width: 20%;
+  color: #fff;
+  text-align: center;
+  font-size: 17px;
+  font-weight: bold;
+  margin: 0px;
+  transition: background-color 0.5s ease;
 }
 nav a:hover {
-	background-color: #F00;
-	text-decoration: none;
-	color: #000;
+  background-color: #59a7f9;
+  text-decoration: none;
+  color: #fff;
 }
+nav .selected {
+  background-color: #d11d1d;
+}
+
+/*Search*/
+.zip_input {
+  width: 3.8em;
+  color: #000;
+  padding: 5px;
+  font-size: 90%;
+}
+
+
+
+/*Main Content Area*/
 .main {
-	margin-left: 0px;
-	margin-right: 0px;
-	background-color: #F9F8F4;
-	border-top: #f00 2px solid;
+  margin-left: 0px;
+  margin-right: 0px;
+  background-color: #F9F8F4;
+  border-top: #d11d1d 3px solid;
 }
+
+/*Footer*/
 footer {
-	background-color: #0e2b49;
-	color: #fff;
-	margin-top: 20px;
+  background-color: #0e2b49;
+  color: #fff;
+  margin-top: 20px;
 }
 
+/*Other styles*/
 .flatbox {
-	font-family: "Open Sans", Lato, Arial, sans-serif;
-	width: 20em;
-	background-color: #59C1F9;
-	padding: 1.5em;
-	color: #fff;
-	font-size: 200%;
-	font-weight: bold;
+  font-family: "Open Sans", Lato, Arial, sans-serif;
+  width: 60%;
+  background-color: #59a7f9;
+  color: #fff;
+  font-size: 200%;
+  font-weight: bold;
+  padding: 1.5em;
+}
+.flatbox input[type="button"] {
+  border: none;
+  margin-top: 1em;
+  margin-bottom: -.5em;
+  background: #F9F8F4;
+  color: #d11d1d;
+  padding: .2em .5em;
+  font-size: 80%;
 }
 
+<<<<<<< HEAD
 .login-block button {
     width: 100%;
     height: 40px;
@@ -93,33 +132,25 @@ footer {
 
 .login-block button:hover {
     background: #ff7b81;
+=======
+/*Specific to Election page*/
+.election {
+  margin-bottom: 50px;
+  font-size: 1.5em;
+}
+.election .date {
+  font-size: 50%;
+>>>>>>> f189ff93193f582897468e58001c79c7755ad1d4
 }
 
 
 /*Specific to Index*/
 .zip {
-	margin: 5em auto;
-	text-align: center;
-/*	border: 3px #fff solid;*/
-	transition: opacity .25s ease-in-out;
+  margin: 5em auto;
+  text-align: center;
+  transition: opacity .25s ease-in-out;
    -moz-transition: opacity .25s ease-in-out;
    -webkit-transition: opacity .25s ease-in-out;
 
    font-variant: small-caps;
-}
-.zip input[type="text"] {
-	width: 3.8em;
-	color: #000;
-	padding: 5px;
-	font-size: 90%;
-}
-.zip input[type="button"] {
-	border: none;
-	margin-top: 1em;
-	margin-bottom: -.5em;
-	background: #F9F8F4;
-	border: 2px #d11d1d solid;
-	color: #d11d1d;
-	padding: .2em .5em;
-	font-size: 80%;
 }

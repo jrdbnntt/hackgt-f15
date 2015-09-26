@@ -2,22 +2,23 @@ extend ../layout
 
 block localJS
 	script(type='text/javascriot' src='/js/public/signin.js')
+	link(href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css')
 
 block content
 	form.form-horizontal
 		fieldset
+
 			legend Sign In
-			
 			.control-group
 				label.form-control(for='email') Email
 				.controls
-					input(type='email' name='email' required)
+					input#email(placeholder='email' type='email' name='email' required)
 			
 			.control-group
 				label.form-control(for='email') Password
 				.controls
-					input(type='password' name='password' required)
-						
+					input#password(name='password' placeholder='password' type='password' required)
+			
 			.control-group
 				.controls
-					button.btn(type='submit') Sign in
+					button.btn.login-block(type='submit') Sign in

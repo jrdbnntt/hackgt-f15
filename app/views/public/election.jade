@@ -1,7 +1,9 @@
-extend ../layout
+extend ../indexlayout
 
 block content
 	p Look at all these elections!
-	ul
+	.container
 		each election in elections
-			li #{election.name}, #{election.level}
+			div(class="flatbox container election")
+				p(class="date") August 14, 2020
+				p #{election.name}, #{election.level}
