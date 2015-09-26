@@ -3,3 +3,5 @@ desktop.ini
 .env
 node-debug.log
 public/bower_components
+
+.DS_Store
