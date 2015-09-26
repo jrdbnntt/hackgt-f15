@@ -9,5 +9,6 @@ block content
 
 		each election in elections
 			div(class="flatbox container election")
-				p(class="date") #{election.date}
+				p(class="date_wrapper") 
+					span(class="date") #{election.date}
 				p #{election.name}, #{election.level}

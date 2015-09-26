@@ -128,11 +128,15 @@ footer {
   transition: background-color 0.5s ease;
   background-color: #d11d1d;
 }
-.election .date {
+.election .date_wrapper {
   font-size: 1em;
   color: #fff;
   background-color: #0E2B49;
   margin: -1.5em -1.5em 0 -1.5em;
+}
+.election .date {
+  background-color: #59a7f9;
+  margin-bottom: -5px;
 }
 
 
