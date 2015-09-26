@@ -22,8 +22,8 @@ module.exports = (app)->
 
 		@electionBrowse: (req, res)->
 			testElections = [
-				{ name: "2016 Presidential Election", level: "federal" }
-				{ name: "2015 Normaltown Mayoral Election", level: "local" }
+				{ name: "2016 Presidential Election", level: "federal", date: "October 10th, 1953" }
+				{ name: "2030 Normaltown Mayoral Election", level: "local", date: "May 29th, 2340" }
 			]
 
 			res.render 'public/election',

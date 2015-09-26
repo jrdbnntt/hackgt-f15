@@ -130,8 +130,9 @@ footer {
 }
 .election .date {
   font-size: 1em;
-  color: #000;
-  margin-top: -1em;
+  color: #fff;
+  background-color: #0E2B49;
+  margin: -1.5em -1.5em 0 -1.5em;
 }
 
 
