@@ -8,6 +8,7 @@ module.exports = (app)->
 		@index: (req, res)->
 			res.render 'index',
 				title: 'Home'
+				zipCode: req.session.zipCode
 
 		@candidateBrowse: (req, res)->
 			testCandidates = [
@@ -55,3 +56,7 @@ module.exports = (app)->
 			res.render 'public/signup',
 				title: 'Sign Up'
 
+		@signup_submit: (req, res)->
+			req.session.zipCode = req.body.zipCode
+
+			res.send {}
