@@ -16,6 +16,6 @@ module.exports = (app)->
 
 testElections = [
 	{ name: "2016 Presidential Election", level: "federal" }
-	{ name: "2015 Normaltown Mayoral", level: "local" }
+	{ name: "2015 Normaltown Mayoral Election", level: "local" }
 ]
 
