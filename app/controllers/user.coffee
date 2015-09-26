@@ -18,9 +18,6 @@ module.exports = (app)->
 				candidate: testCandidate
 
 		@questions: (req, res)->
-			res.render 'index',
-				title: 'Hello'
-				
 			testQuestions = [
 				{ asker: "Alice", text: "How are you today?" }
 				{ asker: "Bob", text: "Do you like pies?" }

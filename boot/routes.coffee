@@ -81,7 +81,7 @@ module.exports = (app)->
 	# app.post '/admin/accountRequests', jsonParser, app.AdminController.accountRequests_submit
 
 	# Manage questions
-	# app.get '/admin/questions', app.AdminController.questions
+	app.get '/admin/questions', app.AdminController.questions
 	# app.post '/admin/questions', app.AdminController.questions_submit
 
 
