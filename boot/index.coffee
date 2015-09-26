@@ -2,7 +2,7 @@
 # Main boot script
 ##
 
-express = require('express')
+express = require 'express'
 
 app = express()
 app.express = express

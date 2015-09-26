@@ -23,7 +23,7 @@ module.exports = (app)->
 	app.get '/index', app.PublicController.index
 
 	# Candidate Signin
-	# app.get '/signin', app.PublicController.signin
+	app.get '/signin', app.PublicController.signin
 	# app.post '/signin', jsonParser, app.PublicController.signin_submit
 
 	# Candidate Signup
