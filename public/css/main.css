@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Lato);
 body {
 	background-color: #103F54;
 	margin: 0px;
@@ -52,4 +53,23 @@ footer {
 	background-color: #103F54;
 	color: #fff;
 	margin-top: 20px;
+}
+
+/*Specific to Index*/
+.zip {
+	font-family: Lato, Arial, sans-serif;
+	width: 15em;
+	background-color: #27aedb;
+	padding: 1.5em;
+	border-radius: 20px;
+	color: #fff;
+	font-size: 200%;
+	margin: 30px auto;
+	font-weight: bold;
+	text-align: center;
+	border: 1px #000 solid;
+}
+.zip input {
+	width: 4em;
+	color: #000;
 }
