@@ -2,7 +2,7 @@
 # User database access
 ##
 
-User =
+table =
 	name: 'User' 
 	col:
 		id: 'id'
@@ -24,18 +24,18 @@ module.exports = (app)->
 					# Save new user
 					con = app.db.newCon()
 					con.query 'INSERT INTO ? (?,?,?) VALUES (?,?,?)', [
-						User.name
+						table.name
 						
-						User.col.roleId
-						User.col.email
-						User.col.password
+						table.col.roleId
+						table.col.email
+						table.col.password
 						
 						(data.roleId || 0)
 						data.email
 						hash
 					]
 					.on 'error', (err)->
-						console.log('DB ERR: ' + User.name + ' create');
+						console.log('DB ERR: ' + table.name + ' create');
 						dfd.reject()
 					.on 'end', ()->
 						dfd.resolve()
@@ -47,25 +47,25 @@ module.exports = (app)->
 			dfd = app.Q.defer()
 			userData = null
 			storedPassword = null
-
+			
 			con = app.db.newCon()
-			con.query 'SELECT ?,? FROM ? WHERE ?=? LIMIT 1', [						
-				User.col.id
-				User.col.roleId
-				User.col.password
+			con.query 'SELECT ?,?,? FROM User WHERE ?=?', [						
+				table.col.id
+				table.col.roleId
+				table.col.password
 				
-				User.name
+				table.name
 				
-				User.col.email, email
+				table.col.email, email
 			]
 			.on 'result', (res)->
 				res.on 'row', (row)->
 					storedPassword = row.password
 					userData = 
-						userId: row.id
-						roleId: row.roleId
+						userId: parseInt row.id
+						roleId: parseInt row.roleId
 						email: email
-				
+					
 				res.on 'end', (info)->
 					if info.numrows == 0
 						console.log '[DB] login failure [bad email]: ' + email
@@ -82,7 +82,7 @@ module.exports = (app)->
 						dfd.resolve userData
 			
 			.on 'error', (err)->
-				console.log('DB ERR: ' + User.name + ' create: ' + err);
+				console.log('DB ERR: ' + table.name + ' create: ' + err);
 				dfd.reject err
 			
 			con.end()

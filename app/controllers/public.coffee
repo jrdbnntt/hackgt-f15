@@ -47,7 +47,7 @@ module.exports = (app)->
 				req.session.user = userData
 				
 				res.send {}
-			.then (err)->
+			, (err)->
 				res.send
 					error: err
 
