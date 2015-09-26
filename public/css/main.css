@@ -65,17 +65,19 @@ footer {
 	margin-top: 20px;
 }
 
-/*Specific to Index*/
-.zip {
+.flatbox {
 	font-family: "Open Sans", Lato, Arial, sans-serif;
 	width: 20em;
 	background-color: #59C1F9;
 	padding: 1.5em;
-	/*border-radius: 25px;*/
 	color: #fff;
 	font-size: 200%;
-	margin: 5em auto;
 	font-weight: bold;
+}
+
+/*Specific to Index*/
+.zip {
+	margin: 5em auto;
 	text-align: center;
 /*	border: 3px #fff solid;*/
 	transition: opacity .25s ease-in-out;
@@ -93,7 +95,10 @@ footer {
 .zip input[type="button"] {
 	border: none;
 	margin-top: 1em;
-	background-color: #fff;
+	margin-bottom: -.5em;
+	background: #F9F8F4;
+	border: 2px #d11d1d solid;
 	color: #d11d1d;
-
+	padding: .2em .5em;
+	font-size: 80%;
 }
