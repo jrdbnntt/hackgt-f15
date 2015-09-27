@@ -18,9 +18,7 @@ partySelect.change(function(ev){
 	refreshParty();
 });
 
-$(document).load(function(ev){
-	refreshParty();
-});
+
 
 var sButtonText = sButton.text();
 var flashSubmitError = function() {
@@ -35,19 +33,153 @@ var flashSubmitError = function() {
 
 // Election inputs
 var ei = {
-	level: find.form('input[name]')
+	level: 	form.find('select[name="electionLevel"]'),
+	type: 	form.find('select[name="electionType"]'),
+	state: 	form.find('select[name="electionState"]'),
+	county: 	form.find('select[name="electionCounty"]'),
+	date: 	form.find('select[name="electionDate"]')
 };
+
+
+
+var refreshCounty = function() {
+	if(ei.level.val() != '0') {
+		ei.county.closest('.form-group').hide();
+		ei.county.prop('required', false);
+		return;
+	}
+	
+	if(!$.trim(ei.state.val())) {
+		ei.county.prop('disabled', true);
+		ei.county.val('');
+		return;
+	}
+	
+	var options = ei.county.find('option');
+	options.prop({
+		disabled: true,
+		hidden: true
+	});
+	
+	stateFull = ei.state.find('option[value="'+ei.state.val()+'"]').text().trim();
+	options.filter('[data-state="'+stateFull+'"]').prop({
+		disabled: false,
+		hidden: false
+	});
+	
+	ei.county.val('');
+	
+	ei.county.closest('.form-group').show();
+	ei.county.prop({
+		required: true,
+		disabled: false
+	});
+};
+
+var refreshState = function() {
+	ei.state.val('');
+	
+	if(ei.level.val() === '2') {
+		ei.state.closest('.form-group').hide();
+		ei.state.prop('required', false);
+		return;
+	}
+	
+	ei.state.closest('.form-group').show();
+	ei.state.prop('required', true);
+	
+	refreshCounty();
+};
+
+
+
+var originalDateOptions = ei.date.html();
+var refreshDates = function() {
+	var electionData = {
+		typeId: ei.type.val().trim(),
+		levelId: ei.level.val().trim(),
+		state: $.trim(ei.state.val()),
+		county: $.trim(ei.county.val())
+	};
+	
+	ei.date.empty();
+	ei.date.html(originalDateOptions);
+	ei.date.prop('disabled', true);
+	
+	if(!electionData.typeId || !electionData.levelId)
+		return;
+	
+	electionData.levelId = parseInt(electionData.levelId);
+	electionData.typeId = parseInt(electionData.typeId);
+	
+	if(electionData.levelId <= 1 && !electionData.state) {
+		return;
+	}
+	
+	if(electionData.levelId === 0 && !electionData.county) {
+		return;
+	}
+	
+	console.log(electionData);
+	
+	$.ajax({
+		method: 'POST',
+		url: '/election/dateSearch',
+		data: JSON.stringify(electionData),
+		contentType: 'application/json',
+		success: function(res) {
+			console.log(res);
+			if(res.error) {
+				console.log(res.error);
+				return;
+			}
+			
+			// Update the options
+			
+			$.each(res.elections, function(i, eData){
+				ei.data.append('<option value="'+eData.id+'">'+eData.date + ' - ' + eData.position+'</option>');
+			});
+			
+			
+			ei.date.prop('disabled', false);
+			
+		},
+		error: function(err) {
+			console.log('Problem getting dates ' + err);
+		}
+	});
+	
+};
+
+
+ei.level.change(function(ev) {
+	refreshState();
+	refreshDates();
+});
+ei.state.change(function(ev) {
+	refreshCounty();
+	refreshDates();
+});
+ei.county.change(function(ev) {
+	refreshDates();
+});
+
+$(document).load(function(ev) {
+	refreshParty();
+});
 
 form.submit(function(ev){
 	ev.preventDefault();
+	sButton.prop('disabled', true);
 	
+	// Get data
 	var jForm = new FormData();
 	jForm.append('firstName', 		form.find('input[name="firstName"]').val().trim());
 	jForm.append('lastName', 		form.find('input[name="lastName"]').val().trim());
 	jForm.append('profilePhoto', 	form.find('input[name="profilePhoto"]').get(0).files[0]);
 	jForm.append('about', 			form.find('textarea[name="about"]').val().trim());
 	jForm.append('email', 			form.find('input[name="email"]').val().trim());
-	jForm.append('password',		form.find('input[name="password"]').val().trim());
+	jForm.append('password',		form.find('input[name="password"]').val());
 	jForm.append('dob',				form.find('input[name="dob"]').val().trim());
 
 	if(newPartyInput.is(':visible'))
@@ -55,9 +187,15 @@ form.submit(function(ev){
 	else
 		jForm.append('party', parseInt(partySelect.val()));
 	
-	sButton.text('Submitting...');
-	sButton.prop('disabled', true);
+	// Validation
+	if(jForm.get('password') !== form.find('input[name="passwordConfirm"]').val()) {
+		alert('Passwords do not match');
+		flashSubmitError();
+		return;
+	}
 	
+	// Submit
+	sButton.text('Submitting...');
 	$.ajax({
 		type: 'POST',
 		url: '/signup',

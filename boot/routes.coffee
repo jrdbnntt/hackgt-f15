@@ -30,8 +30,6 @@ module.exports = (app)->
 	app.get '/signup', app.PublicController.signup
 	app.post '/signup', jsonParser, app.PublicController.signup_submit
 
-
-
 	# Election browser for all
 	app.get '/election', app.PublicController.electionBrowse
 
@@ -48,6 +46,8 @@ module.exports = (app)->
 	# app.post '/election/question/new', jsonParser, app.PublicController.questionNew
 	# app.post '/election/question/rate', jsonParser, app.PublicController.questionRate
 
+	# Election search
+	app.post '/election/dateSearch', jsonParser, app.PublicController.electionDateSearch
 
 
 	# Candidate Browser

@@ -8,47 +8,43 @@ block localJS
 
 block content
 	form#signup.form-horizontal
-		fieldset.col-md-offset-3.col-md-6
-			h1 Sign Up
+		fieldset.col-md-offset-2.col-md-8
+			h1 Candidate Sign Up
+			
+			h3 Account Information
 			
 			.form-group
 				label.control-label.col-md-3 Email
 				.col-md-9
 					input.form-control(type='email' name='email' required)
-
 			.form-group
 				label.control-label.col-md-3 Password
 				.col-md-9
 					input.form-control(type='password' name='password' required)
+			.form-group
+				label.control-label.col-md-3 Confirm Password
+				.col-md-9
+					input.form-control(type='password' name='passwordConfirm' required)
 			
-			br
+			
+			h3 Personal Information
 						
 			.form-group
 				label.control-label.col-md-3 First Name
 				.col-md-9
 					input.form-control(type='text' name='firstName' required)
-			
 			.form-group
 				label.control-label.col-md-3 Last Name
 				.col-md-9
 					input.form-control(type='text' name='lastName' required)
-
 			.form-group
 				label.control-label.col-md-3 Date of Birth
 				.col-md-9
 					input.form-control(type='date' name='dob' required)
-			
 			.form-group
 				label.control-label.col-md-3 Profile Picture
 				.col-md-9
 					input.form-control(type='file' name='profilePhoto' required)
-
-			.form-group
-				label.control-label.col-md-3 Autobiography
-				.col-md-9
-					textarea.form-control(name='about' rows='5' cols='15' style='resize: vertical;' required)
-			
-			
 			.form-group
 				label.control-label.col-md-3 Political Party
 				.col-md-9
@@ -57,12 +53,65 @@ block content
 						option(value='-1') Add new party...
 						
 						for party in parties
-							option(value='#{party.id}')= party.name
-			
+							option(value=party.id)= party.name
 			.form-group(style='display: none;')
 				label.control-label.col-md-3 
 				.col-md-9
 					input.form-control(type='text' name='newParty' placeholder='Your Party')
+			.form-group
+				label.control-label.col-md-3 About You
+				.col-md-9
+					textarea.form-control(name='about' rows='5' cols='15' style='resize: vertical;' required)
+			
+			
+			
+			h3 Participating Election
+			
+			.form-group
+				label.control-label.col-md-3 Type
+				.col-md-9
+					select.form-control(name='electionType' required)
+						option(selected disabled hidden value='')
+						
+						for type in data.electionTypes
+							option(value=type.id)= type.name
+			
+			.form-group
+				label.control-label.col-md-3 Level
+				.col-md-9
+					select.form-control(name='electionLevel' required)
+						option(selected disabled hidden value='')
+						
+						for level in data.govLevels
+							option(value=level.id)= level.name
+			
+			.form-group(style='display: none;')
+				label.control-label.col-md-3 State
+				.col-md-9
+					select.form-control(name='electionState')
+						option(selected disabled hidden value='')
+						
+						for state in data.states.titleCase
+							option(value=state.abbreviation)= state.name
+			
+			.form-group(style='display: none;')
+				label.control-label.col-md-3 County
+				.col-md-9
+					select.form-control(name='electionCounty')
+						option(selected disabled hidden value='')
+						
+						- var i = 0
+						each stateGroup, state in data.countiesByState
+							for county in stateGroup
+								option(value=county disabled hidden data-state=state)= county
+			
+			.form-group
+				label.control-label.col-md-3 Found Dates
+				.col-md-9
+					select.form-control(name='electionDate' disabled)
+						option(selected disabled hidden value='')
+						option(value='-1') Add New Election...
+						
 			
 			.form-group.text-center
 				button.btn.btn-default(type='submit') Sign Up

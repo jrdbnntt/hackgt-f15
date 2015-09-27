@@ -128,4 +128,18 @@ module.exports = (app)->
 						res.json
 							error: err
 					
-					
+		@electionDateSearch: (req, res)->
+			if !req.body.typeId? ||
+			!req.body.levelId?
+				res.json
+					error: 'Invalid params'
+			
+			app.models.Election.getDateByInfo req.body
+			.then (elections)->
+				console.log elections
+				res.json
+					elections: elections
+			, (err)->
+				res.json
+					error: err
+	
