@@ -10,11 +10,6 @@ module.exports = (app)->
 				title: 'Home'
 				zipCode: req.session.zipCode
 
-		@zip_submit: (req, res)->
-			req.session.zipCode = req.body.zipCode
-
-			res.send {}
-
 		@candidateBrowse: (req, res)->
 			testCandidates = [
 				{ name: "John Doe", election: "2016 Presidential Election" }
@@ -138,3 +133,46 @@ module.exports = (app)->
 					, (err)->
 						res.json
 							error: err
+
+		@question: (req, res)->
+			# req.params.electionId gives the electionId
+			# Todo: fetch all questions for the given election
+			# Todo: fetch election info
+			# Todo: fetch all candidates in the given election
+			app.models.Question.list
+				electionId: req.params.electionId
+			.then (questions)->
+				res.render 'public/question',
+					title: 'Question List'
+					questions: questions
+
+		@question_new: (req, res)->
+			# Todo: add the question to the database
+			if !(req.body.asker? && req.body.text?)
+				res.send {"error": "missing parameters"}
+				return
+
+			app.models.Question.create
+				asker: req.body.asker
+				text: req.body.text
+			.then ()->
+				res.send {}
+
+		@question_rate: (req, res)->
+			# Todo: increment/decrement score
+			if !(req.body.questionId? && req.body.upOrDown?)
+				res.send {"error": "missing parameters"}
+				return
+
+			app.models.Question.rate
+				questionId: req.body.questionId
+				upOrDown: req.body.upOrDown
+			.then ()->
+				res.send {}
+
+			res.send {}
+
+		@zip_submit: (req, res)->
+			req.session.zipCode = req.body.zipCode
+
+			res.send {}
