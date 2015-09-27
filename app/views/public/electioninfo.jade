@@ -1,11 +1,10 @@
 extend ../layout
 
 block localJS
-	script(type='text/javascriot' src='/js/public/signin.js')
+	script(type='text/javascript' src='/js/public/electioninfo.js')
 	link(href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css')
 
 block content
-	form.form-horizontal
 		fieldset
 
 			legend Election Information
@@ -14,6 +13,23 @@ block content
 
 			h1 Candidates
 
+				h2 Bernie Sanders (Democrat) 
+				img.div(src='images/sanders.jpg')
+
+
+				h2 Martin O'Malley (Democrat)
+				img.div(src='malley.png')
+
+				h2 Hillary Clinton (Democrat)
+				img.div(src='clinton.jpg')
+
+				h2 Donald Trump (Republican)
+				img.div(src='trump.jpg')
+
+				h2 Jeb Bush (Republican)
+				img.div(src='bush.jpg')
+
+		form.form-horizontal
 			h1 Crowd Source Questions
 			.control-group
 				label.form-control(for='email') Question
