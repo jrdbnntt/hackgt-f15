@@ -51,8 +51,8 @@ module.exports = (app)->
 
 	# Election crowdsource question handling
 	app.get '/election/:electionId/question', app.PublicController.question
-	# app.post '/election/question/new', jsonParser, app.PublicController.questionNew
-	# app.post '/election/question/rate', jsonParser, app.PublicController.questionRate
+	app.post '/election/question/new', jsonParser, app.PublicController.questionNew
+	app.post '/election/question/rate', jsonParser, app.PublicController.questionRate
 
 
 
