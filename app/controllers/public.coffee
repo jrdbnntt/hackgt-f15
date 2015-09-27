@@ -117,6 +117,7 @@ module.exports = (app)->
 						console.log 'user created: ' + userId
 						app.models.Candidate.create
 							userId: userId
+							partyId: input.partyId
 							firstName: input.firstName
 							lastName: input.lastName
 							dob: input.dob

@@ -22,8 +22,8 @@ module.exports = (app)->
 			qcnt = 0
 			
 			con = app.db.newMultiCon()
-			con.query 'INSERT INTO Candidate (userId,firstName,lastName,dob,pictureUrl) '+
-			'VALUES (?,?,?,?,?); SELECT LAST_INSERT_ID() AS id;', [	
+			con.query 'INSERT INTO Candidate (userId, firstName, lastName, dob, about, pictureUrl) '+
+			'VALUES (?,?,?,?,?,?); SELECT LAST_INSERT_ID() AS id;', [	
 				data.userId
 				data.firstName
 				data.lastName
