@@ -20,8 +20,8 @@ module.exports = (app)->
 				{ asker: "Bob", text: "Do you like pies?" }
 			]
 
-			res.render 'public/candidate',
-				title: 'Candidates'
+			res.render 'public/candidateBrowser',
+				title: 'Candidate Browser'
 				election: req.session.election
 				candidates: testCandidates
 				questions: testQuestions
@@ -32,10 +32,15 @@ module.exports = (app)->
 				{ name: "2030 Normaltown Mayoral Election", level: "local", date: "May 29th, 2340" }
 			]
 
-			res.render 'public/election',
-				title: 'Elections'
+			res.render 'public/electionBrowse',
+				title: 'Election Browser'
 				elections: testElections
-
+		
+		@electionView: (req, res)->
+			res.render 'public/electionView',
+				title: 'Election View'
+		
+		
 		@referendums: (req, res)->
 			res.render 'public/referendums',
 				title: 'lol'
@@ -136,9 +141,6 @@ module.exports = (app)->
 						console.log 'user crash on save: ' + err
 						res.json
 							error: err
-<<<<<<< HEAD
-
-=======
 					
 		@electionDateSearch: (req, res)->
 			if !req.body.typeId? ||
@@ -198,4 +200,8 @@ module.exports = (app)->
 			req.session.zipCode = req.body.zipCode
 
 			res.send {}
->>>>>>> 54d17bc4a20e15fdd401a2614e9da4854c36789f
+			
+		@votingInfo: (req, res)->
+			res.render 'public/votingInfo',
+				title: 'Voting Information'
+				

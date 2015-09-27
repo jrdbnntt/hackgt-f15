@@ -18,25 +18,27 @@ html
 		//- Global Header
 		header
 			.container
-				div.logo.col-xs-12.col-sm-8
-					img(src="images/logo.png") 
+				.logo.col-xs-12.col-sm-8
 					a(href='/home')
+						img(src="/images/logo.png") 
 				nav.col-xs-12.col-sm-10
 				
-				.search
-					p Search:
-						input(type="search" id="search" placeholder="Zipcode")
+				if title != 'Home'
+					.search
+						p Search:
+							input(type="search" id="search" placeholder="Zip")
 
-		if (election)
-			h1.title #{election}
-		else
-			h1.title Generic election
+		//- if election
+		//- 	h1.title #{election}
+		//- else
+		//- 	h1.title Generic election
 
 		div.navwrapper
 			nav.container
-				a(href="/electioninfo") Election Info
-				a(href="/candidates") Candidates
-				a(href="/referendums") Referendums
+				a(href='/voting/info' class="#{title == 'Voting Information'? 'selected' : ''}") How to Vote
+				a(href='/election/browse' class="#{title == 'Election Browser'? 'selected' : ''}") Elections
+				a(href='/candidate/browse' class="#{title == 'Candidate Browser'? 'selected' : ''}") Candidates
+				//- a(href="/referendums") Referendums
 
 		//- Body
 		div.container-fluid.main
@@ -46,8 +48,10 @@ html
 				hr
 		//- Global Footer
 		footer
-			.container
-					p.
+			.container.text-left
+					p
+						a(href='/signup') Candidate Signup
+					p.text-center.
 						© 2015 by VoteBoat.
 		
 		//- Global JavaScript

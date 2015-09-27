@@ -34,33 +34,35 @@ module.exports = (app)->
 	app.post '/signup', app.PublicController.signup_submit
 
 	# Election browser for all
-	app.get '/election', app.PublicController.electionBrowse
+	app.get '/election/browse', app.PublicController.electionBrowse
 
 	# Election description for single
-	app.get '/election/:electionId', app.PublicController.electionView
+	app.get '/election/view/:electionId', app.PublicController.electionView
 
 	# Election issue browser
-	app.get '/election/:electionId/issue', app.PublicController.issueBrowse
+	# app.get '/election/:electionId/issue', app.PublicController.issueBrowse
 
 	# Election issue view single
-	app.get '/election/:electionId/issue/:issueId', app.PublicController.issueView
+	# app.get '/election/:electionId/issue/:issueId', app.PublicController.issueView
 
 	# Election crowdsource question handling
-	app.get '/election/:electionId/question', app.PublicController.question
-	app.post '/election/question/new', jsonParser, app.PublicController.question_new
-	app.post '/election/question/rate', jsonParser, app.PublicController.question_rate
+	# app.get '/election/:electionId/question', app.PublicController.question
+	# app.post '/election/question/new', jsonParser, app.PublicController.question_new
+	# app.post '/election/question/rate', jsonParser, app.PublicController.question_rate
 
 	# Election search
 	app.post '/election/dateSearch', jsonParser, app.PublicController.electionDateSearch
 
 
 	# Candidate Browser
-	app.get '/candidate', app.PublicController.candidateBrowse
+	app.get '/candidate/browse', app.PublicController.candidateBrowse
 
 	# Candidate View for single one
 	# app.get '/candidate/:candidateId', app.PublicController.candidateView
 
 
+	# Voting
+	app.get '/voting/info', app.PublicController.votingInfo
 
 	###########################################################
 	# User pages
@@ -69,11 +71,11 @@ module.exports = (app)->
 	# app.get '/user/signout', app.UserController.signout
 
 	# Edit Profile
-	app.get '/user/edit/profile', app.UserController.editProfile
+	# app.get '/user/edit/profile', app.UserController.editProfile
 	# app.post '/user/edit/profile', jsonParser, app.UserController.editProfile_submit
 
 	# Answer Questions
-	app.get '/user/questions', app.UserController.questions
+	# app.get '/user/questions', app.UserController.questions
 	# app.post '/user/questions', jsonParser, app.UserController.questions_submit
 
 
@@ -85,7 +87,7 @@ module.exports = (app)->
 	# app.post '/admin/accountRequests', jsonParser, app.AdminController.accountRequests_submit
 
 	# Manage questions
-	app.get '/admin/questions', app.AdminController.questions
+	# app.get '/admin/questions', app.AdminController.questions
 	# app.post '/admin/questions', app.AdminController.questions_submit
 
 

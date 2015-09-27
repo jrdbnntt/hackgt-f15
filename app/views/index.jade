@@ -1,4 +1,4 @@
-extend indexlayout
+extend layout
 
 //- block vars
 
@@ -10,10 +10,8 @@ extend indexlayout
 
 block content
 
-  div.zip.flatbox
-
-    p Enter your zip code: &nbsp;
-
-      input.zip_input(type="text" autofocus)
-
-      input(type="button" value="Submit")
+	.zip.flatbox
+		p Enter your zip code: &nbsp;
+			input.zip_input(type="text" autofocus)
+			input(type="button" value="Submit")
+	
