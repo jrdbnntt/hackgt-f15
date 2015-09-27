@@ -250,12 +250,11 @@ ei.date.change(function(ev) {
 });
 
 
-
 form.submit(function(ev){
 	ev.preventDefault();
 	sButton.prop('disabled', true);
 	
-	// Get data
+	// Prepare data
 	var jForm = new FormData();
 	jForm.append('firstName', 		form.find('input[name="firstName"]').val().trim());
 	jForm.append('lastName', 		form.find('input[name="lastName"]').val().trim());
@@ -264,11 +263,44 @@ form.submit(function(ev){
 	jForm.append('email', 			form.find('input[name="email"]').val().trim());
 	jForm.append('password',		form.find('input[name="password"]').val());
 	jForm.append('dob',				form.find('input[name="dob"]').val().trim());
+	
 
 	if(newPartyInput.is(':visible'))
 		JForm.append('newParty', newPartyInput.val().trim());
 	else
 		jForm.append('party', parseInt(partySelect.val()));
+	
+	if(newBallot.is(':visible')) {
+		var electionData = {
+			typeId: 			ei.type.val(),
+			levelId: 		ei.level.val(),
+			state: 			$.trim(ei.state.val()),
+			county: 			$.trim(ei.county.val()),
+			position: 		newBallot.find('input[name="position"]'),
+			date: 			newBallot.find('input[name="newDate"]'),
+			candidates: 	[],
+			referendums: 	[]
+		};
+		
+		var i, len, o;
+		len = parseInt(nb.numCandidates.val());
+		for(i = 0; i < len; ++i) {
+			electionData.candidates.push({
+				firstName: 	nb.candidates.find('input[name="c'+i+'-firstName"]').val().trim(),
+				lastName: 	nb.candidates.find('input[name="c'+i+'-lastName"]').val().trim()
+			});
+		}
+		
+		len = parseInt(nb.numReferendums.val());
+		for(i = 0; i < len; ++i) {
+			electionData.referendums.push({
+				name: 			nb.referendums.find('input[name="r'+i+'-name"]').val().trim(),
+				description: 	nb.referendums.find('textarea[name="r'+i+'-description"]').val().trim()
+			});
+		}
+		
+		jForm.append('electionData', 	JSON.stringify(electionData));
+	}
 	
 	// Validation
 	if(jForm.get('password') !== form.find('input[name="passwordConfirm"]').val()) {

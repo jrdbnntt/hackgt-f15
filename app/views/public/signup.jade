@@ -114,6 +114,16 @@ block content
 						
 			.newElection(style='display: none;')
 				.form-group
+					label.control-label.col-md-3 Office Position
+					.col-md-9
+						input.form-control(type='text' name='position' required)
+							
+				.form-group
+					label.control-label.col-md-3 Poll Date
+					.col-md-9
+						input.form-control(type='date' name='newDate' required)
+				
+				.form-group
 					label.control-label.col-md-3 Other Candidates
 					.col-md-9
 						select.form-control(name='numCandidates' required)
