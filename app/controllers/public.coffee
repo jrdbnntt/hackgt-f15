@@ -10,7 +10,7 @@ module.exports = (app)->
 				title: 'Home'
 				zipCode: req.session.zipCode
 
-		@index_submit: (req, res)->
+		@zip_submit: (req, res)->
 			req.session.zipCode = req.body.zipCode
 
 			res.send {}
@@ -27,6 +27,7 @@ module.exports = (app)->
 
 			res.render 'public/candidate',
 				title: 'Candidates'
+				election: req.session.election
 				candidates: testCandidates
 				questions: testQuestions
 
@@ -133,5 +134,3 @@ module.exports = (app)->
 					, (err)->
 						res.json
 							error: err
-					
-					

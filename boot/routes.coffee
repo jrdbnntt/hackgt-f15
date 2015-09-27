@@ -22,6 +22,9 @@ module.exports = (app)->
 	app.get '/home', app.PublicController.index
 	app.get '/index', app.PublicController.index
 
+	# When the user updates their zip code
+	app.post '/zip_submit', jsonParser, app.PublicController.zip_submit
+
 	# Candidate Signin
 	app.get '/signin', app.PublicController.signin
 	app.post '/signin', jsonParser, app.PublicController.signin_submit
