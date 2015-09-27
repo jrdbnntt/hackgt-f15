@@ -1,0 +1,18 @@
+extend ../layout
+
+block content
+	div(class="flatbox")
+		p Ask a new question: &nbsp;
+			input(type="text")
+			input(type="button" value="Ask")
+
+	each question in questions
+		div(class="votebox")
+			// upvote
+			p ^
+			// score
+			p #{question.score}
+			// downvote
+			p v
+
+		p #{question.text}

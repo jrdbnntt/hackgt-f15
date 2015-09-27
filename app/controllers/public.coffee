@@ -136,6 +136,9 @@ module.exports = (app)->
 
 		@question: (req, res)->
 			# req.params.electionId gives the electionId
+			# Todo: fetch all questions for the given election
+			# Todo: fetch election info
+			# Todo: fetch all candidates in the given election
 			testQuestions = [
 				{ asker: 'Alice', score: 1000, qid: 1, text: "What's up?" }
 				{ asker: 'Bob', score: 500, qid: 5, text: "Do you like pizza?" }
@@ -145,6 +148,22 @@ module.exports = (app)->
 			res.render 'public/question',
 				title: 'Question List'
 				questions: testQuestions
+
+		@question_new: (req, res)->
+			# Todo: add the question to the database
+			if !(res.body.asker? && res.body.text?)
+				res.send {"error": "invalid params"}
+				return
+
+			res.send {}
+
+		@question_rate: (req, res)->
+			# Todo: increment/decrement score
+			if !(res.body.qid? || res.body.direction? )
+				res.send {"error": "invalid params"}
+				return
+
+			res.send {}
 
 		@zip_submit: (req, res)->
 			req.session.zipCode = req.body.zipCode
