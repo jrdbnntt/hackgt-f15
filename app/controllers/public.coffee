@@ -43,7 +43,7 @@ module.exports = (app)->
 
 		@referendums: (req, res)->
 			res.render 'public/referendums',
-				title: 'Referendums'
+				title: 'lol'
 
 		@signin: (req, res)->
 			res.render 'public/signin',
@@ -138,3 +138,4 @@ module.exports = (app)->
 					, (err)->
 						res.json
 							error: err
+
