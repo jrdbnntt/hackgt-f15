@@ -28,7 +28,7 @@ module.exports = (app)->
 
 	# Candidate Signup
 	app.get '/signup', app.PublicController.signup
-	app.post '/signup', jsonParser, app.PublicController.signup_submit
+	app.post '/signup', app.PublicController.signup_submit
 
 	# Election browser for all
 	app.get '/election', app.PublicController.electionBrowse

@@ -72,36 +72,35 @@ module.exports = (app)->
 		
 		@signup_submit: (req, res)->
 			input = null
-			form = new app.formiddable.IncomingForm()
+			form = new app.formidable.IncomingForm()
 			form.parse req, (err, fields, files)->
 				input = fields
 				if err
 					res.json
-						err: err
+						error: err
 					return
 			
 			form.on 'end', (fields, files)->
 				srcPath = this.openedFiles[0].path
 				fileName = app.models.User.genFileName this.openedFiles[0].name
-				dstLocation = app.dirs.static + '/img/static'
+				dstLocation = app.dirs.static + '/images/static/'
 				app.fs.move srcPath, dstLocation + fileName
 				, (err)->
 					if err
 						res.json
 							error: 'Problem moving image'
 						return
-				
-					if !(input.partyId? || input.partyName?) ||
+									
+					if !(input.partyId? || input.newParty?) ||
 					!(input.electionId? || input.electionData?) ||
 					!input.email? ||
 					!input.password? ||
 					!input.firstName? ||
 					!input.lastName? ||
 					!input.dob? ||
-					!input.about? ||
-					!this.openedFiles.length == 0
+					!input.about?
 						res.json
-							err: 'Invalid parameters'
+							error: 'Invalid parameters'
 						return
 					
 					# Create the user, then the candidate
@@ -119,12 +118,16 @@ module.exports = (app)->
 							about: input.about
 							pictureUrl: fileName
 						.then (candidateId)->
+							
 							console.log 'Candidate created: ' + input.fileName +' '+ input.lastName
 							res.json
 								candidateId: candidateId
 						, (err)->
+							console.log 'candidate crash on save: ' + err
 							res.json
+								error: err
 					, (err)->
+						console.log 'user crash on save: ' + err
 						res.json
 							error: err
 					

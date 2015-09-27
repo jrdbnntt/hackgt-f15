@@ -268,16 +268,16 @@ form.submit(function(ev){
 	if(newPartyInput.is(':visible'))
 		JForm.append('newParty', newPartyInput.val().trim());
 	else
-		jForm.append('party', parseInt(partySelect.val()));
+		jForm.append('partyId', parseInt(partySelect.val()));
 	
 	if(newBallot.is(':visible')) {
 		var electionData = {
-			typeId: 			ei.type.val(),
-			levelId: 		ei.level.val(),
+			typeId: 			parseInt(ei.type.val()),
+			levelId: 		parseInt(ei.level.val()),
 			state: 			$.trim(ei.state.val()),
 			county: 			$.trim(ei.county.val()),
-			position: 		newBallot.find('input[name="position"]'),
-			date: 			newBallot.find('input[name="newDate"]'),
+			position: 		newBallot.find('input[name="position"]').val().trim(),
+			date: 			newBallot.find('input[name="newDate"]').val(),
 			candidates: 	[],
 			referendums: 	[]
 		};
@@ -300,14 +300,18 @@ form.submit(function(ev){
 		}
 		
 		jForm.append('electionData', 	JSON.stringify(electionData));
+	} else {
+		jForm.append('electionId', parseInt(ei.date.val()));
 	}
 	
 	// Validation
-	if(jForm.get('password') !== form.find('input[name="passwordConfirm"]').val()) {
+	if(form.find('input[name="password"]').val() !== form.find('input[name="passwordConfirm"]').val()) {
 		alert('Passwords do not match');
 		flashSubmitError();
 		return;
 	}
+	
+	console.log(jForm);
 	
 	// Submit
 	sButton.text('Submitting...');
@@ -320,6 +324,7 @@ form.submit(function(ev){
 		cache: false,
 		processData: false,
 		success: function(res) {
+			console.log(res);
 			if(res.error) {
 				flashSubmitError();
 				alert(res.error);
