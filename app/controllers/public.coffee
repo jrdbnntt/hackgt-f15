@@ -62,14 +62,13 @@ module.exports = (app)->
 			
 			app.models.Party.getAll()
 			.then (parties)->	
-				console.log(parties)
 				res.render 'public/signup',
 					title: title
-					parites: parites
+					parties: parties
 			, (err)->
 				res.render 'public/signup',
 					title: title
-					parites: []
+					parties: []
 		
 		@signup_submit: (req, res)->
 			input = null

@@ -1,52 +1,68 @@
 extend ../layout
 
-block localJS
-	script(type='text/javascriot' src='/js/public/signup.js')
+block localCSS
 	link(href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css')
 
+block localJS
+	script(type='text/javascript' src='/js/public/signup.js')
+
 block content
-	p Look at the signup page!
+	form#signup.form-horizontal
+		fieldset.col-md-offset-3.col-md-6
+			h1 Sign Up
+			
+			.form-group
+				label.control-label.col-md-3 Email
+				.col-md-9
+					input.form-control(type='email' name='email' required)
 
-	form.form-horizontal
-		fieldset
-			legend Sign Up
+			.form-group
+				label.control-label.col-md-3 Password
+				.col-md-9
+					input.form-control(type='password' name='password' required)
+			
+			br
+						
+			.form-group
+				label.control-label.col-md-3 First Name
+				.col-md-9
+					input.form-control(type='text' name='firstName' required)
+			
+			.form-group
+				label.control-label.col-md-3 Last Name
+				.col-md-9
+					input.form-control(type='text' name='lastName' required)
 
-			.control-group
-				label.form-control(for='') Full Name
-				.controls
-					input(type='text' name='name' required)
+			.form-group
+				label.control-label.col-md-3 Date of Birth
+				.col-md-9
+					input.form-control(type='date' name='dob' required)
+			
+			.form-group
+				label.control-label.col-md-3 Profile Picture
+				.col-md-9
+					input.form-control(type='file' name='profilePhoto' required)
 
-			.control-group
-				label.form-control(for='email') Photo
-				.controls
-					input(type='file' name='photo' required)
-
-			.control-group
-				label.form-control(for='') Autobiography
-				.controls
-					input(textarea rows="5" cols="15" required)
-			.control-group
-				label.form-control(for='email') Email
-				.controls
-					input(type='email' name='email' required)
-
-			.control-group
-				label.form-control(for='email') Password
-				.controls
-					input(type='password' name='password' required)
-
-			.control-group
-				label.form-control(for='') Date of birth
-				.controls
-					input(type='date' name='date' required)
-
-			.control-group
-				label.form-control Political Party
-				.controls
-					select(name='party')
+			.form-group
+				label.control-label.col-md-3 Autobiography
+				.col-md-9
+					textarea.form-control(name='about' rows='5' cols='15' style='resize: vertical;' required)
+			
+			
+			.form-group
+				label.control-label.col-md-3 Political Party
+				.col-md-9
+					select.form-control(name='party' required)
+						option(selected disabled hidden value='')
 						option(value='-1') Add new party...
+						
 						for party in parties
-							option(value=party.id)= party.name
-			.control-group
-				.controls
-					button.btn(type='submit') Sign Ups
+							option(value='#{party.id}')= party.name
+			
+			.form-group(style='display: none;')
+				label.control-label.col-md-3 
+				.col-md-9
+					input.form-control(type='text' name='newParty' placeholder='Your Party')
+			
+			.form-group.text-center
+				button.btn.btn-default(type='submit') Sign Up
