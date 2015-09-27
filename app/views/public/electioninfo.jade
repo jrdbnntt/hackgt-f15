@@ -10,32 +10,60 @@ block content
 			legend Election Information
 
 			h1 Statistics
+				table
+				  tr
+				    td Presidential Candidate
+				    td Political Party
+				    td Campaign site
+				  tr
+				    td Hillary Clinton
+				    td Democrat
+				    td HillaryClinton.com
+				  tr
+				  	td Martin O'Malley	
+					td Democrat
+					td MartinOMalley.com
+				  tr
+				  	td Bernie Sanders
+				  	td Democrat
+				  	td berniesanders.com
+				  tr
+				  	td Jeb Bush
+				  	td Republican
+				  	td jeb2016.com
 
+
+			
 			h1 Candidates
 
 				h2 Bernie Sanders (Democrat) 
-				img.div(src='images/sanders.jpg')
+				.div photos
+				img.(src='images/sanders.jpg')
 
 
 				h2 Martin O'Malley (Democrat)
-				img.div(src='malley.png')
+				.div photos
+				img(src='malley.png')
 
 				h2 Hillary Clinton (Democrat)
-				img.div(src='clinton.jpg')
+				.div photos
+				img(src='clinton.jpg')
 
 				h2 Donald Trump (Republican)
-				img.div(src='trump.jpg')
+				.div photos
+				img(src='trump.jpg')
 
 				h2 Jeb Bush (Republican)
-				img.div(src='bush.jpg')
+				.div photos
+				img(src='bush.jpg')
 
-		form.form-horizontal
-			h1 Crowd Source Questions
-			.control-group
-				label.form-control(for='email') Question
-				.controls
-					input#question(placeholder='question' type='text' name='question' required)
-						
-			.control-group
-				.controls
-					button.btn.login-block(type='submit') Ask
+			form.form-horizontal
+				h1 Crowd Source Questions
+				.control-group
+					label.form-control(for='email') Question
+					.controls
+						input#question(placeholder='question' type='text' name='question' required)
+							
+				.control-group
+					.controls
+						button.btn.login-block(type='submit') Ask

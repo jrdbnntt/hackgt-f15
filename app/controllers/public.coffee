@@ -38,7 +38,7 @@ module.exports = (app)->
 
 		@referendums: (req, res)->
 			res.render 'public/referendums',
-				title: 'Referendums'
+				title: 'lol'
 
 		@signin: (req, res)->
 			res.render 'public/signin',
@@ -136,6 +136,9 @@ module.exports = (app)->
 						console.log 'user crash on save: ' + err
 						res.json
 							error: err
+<<<<<<< HEAD
+
+=======
 					
 		@electionDateSearch: (req, res)->
 			if !req.body.typeId? ||
@@ -195,3 +198,4 @@ module.exports = (app)->
 			req.session.zipCode = req.body.zipCode
 
 			res.send {}
+>>>>>>> 54d17bc4a20e15fdd401a2614e9da4854c36789f
