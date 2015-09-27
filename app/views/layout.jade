@@ -25,7 +25,10 @@ html
 					p Search For More Elections:
 						input(type="search" class="zip_input" id="search" placeholder="Search..")
 
-		h1(class="title") Election Title Name District 5					
+		if (election)
+			h1(class="title") #{election}
+		else
+			h1(class="title") Generic election
 
 		div(class="navwrapper")
 			nav(class="container")
