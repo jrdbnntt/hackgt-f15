@@ -20,10 +20,15 @@ module.exports = (app)->
 				{ name: "John Doe", election: "2016 Presidential Election" }
 				{ name: "Jane Doe", election: "2015 Normaltown Mayoral Election" }
 			]
+			testQuestions = [
+				{ asker: "Alice", text: "How are you today?" }
+				{ asker: "Bob", text: "Do you like pies?" }
+			]
 
 			res.render 'public/candidate',
 				title: 'Candidates'
 				candidates: testCandidates
+				questions: testQuestions
 
 		@electionBrowse: (req, res)->
 			testElections = [

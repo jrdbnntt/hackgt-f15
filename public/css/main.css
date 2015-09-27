@@ -35,10 +35,12 @@ header {
   max-width: 100%;
 }
 
-header h1 {
+
+h1 {
   color: #fff;
   font-family: Montserrat, Lato, Arial, sans-serif;
-  background-color: #f0f;
+  text-align: center;
+  margin-bottom: .8em;
 }
 
 /*Navigation*/
@@ -90,6 +92,11 @@ nav .selected {
   margin-right: 0px;
   background-color: #F9F8F4;
   border-top: #d11d1d 3px solid;
+}
+.main hr {
+  border: none;
+  height: 20px;
+  clear: both;
 }
 
 /*Footer*/

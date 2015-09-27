@@ -1,7 +1,11 @@
 extend ../layout
 
 block content
-	h2 Election Title
-	ul
-		each candidate in candidates
-			li #{candidate.name}, #{candidate.election}
+	h2 Candidates
+	table
+		each question in questions
+			tr
+				td #{question.text}
+			tr 
+				each candidate in candidates
+					td #{candidate.name}, #{candidate.election}
