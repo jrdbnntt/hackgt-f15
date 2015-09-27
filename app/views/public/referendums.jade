@@ -1,0 +1,15 @@
+extend ../layout
+
+block content
+	h2 Candidates
+	table(class="candidate_table table table-bordered")
+		tr
+			td &nbsp;
+			each candidate in candidates
+				td(class="candidate") #{candidate.name}
+
+		each question in questions
+			tr
+				td(class="question") #{question.text} 
+				each candidate in candidates
+					td #{candidate.name}, #{candidate.election}

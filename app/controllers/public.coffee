@@ -41,6 +41,10 @@ module.exports = (app)->
 				title: 'Elections'
 				elections: testElections
 
+		@referendums: (req, res)->
+			res.render 'public/referendums',
+				title: 'Referendums'
+
 		@signin: (req, res)->
 			res.render 'public/signin',
 				title: 'Sign In'
