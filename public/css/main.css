@@ -36,12 +36,13 @@ header {
 }
 
 
-h1 {
+.title {
   color: #fff;
   font-family: Montserrat, Lato, Arial, sans-serif;
   text-align: center;
   margin-bottom: .8em;
 }
+
 
 /*Navigation*/
 .navwrapper {
@@ -76,7 +77,13 @@ nav .selected {
   background-color: #d11d1d;
 }
 
+<<<<<<< HEAD
 /*Search*/x
+=======
+
+
+/*Search*/
+>>>>>>> 0036e12cfbb68033e9acb110f4a955d37147d0c1
 .zip_input {
   margin: 100px auto;
   width: 300px;
@@ -101,6 +108,17 @@ nav .selected {
   height: 20px;
   clear: both;
 }
+.main h2 {
+  margin-top: 1em;
+  margin-bottom: 2em;
+  text-indent: 1em;
+  font-family: Montserrat, Lato, Arial, sans-serif;
+  color: #d11d1d;
+  border-bottom: 2px #59a7f9 solid;
+  width: 70%;
+}
+
+
 
 /*Footer*/
 footer {
@@ -108,6 +126,8 @@ footer {
   color: #fff;
   margin-top: 20px;
 }
+
+
 
 /*Other styles*/
 .flatbox {
@@ -148,6 +168,14 @@ footer {
 .login-block button:hover {
     background: #ff7b81;
 }
+
+
+/*Candidate table*/
+.candidate_table {
+  font-size: 14pt;
+  border-top: none;
+}
+
 
 
 /*Specific to Election page*/

@@ -8,6 +8,7 @@ html
 		//- Global CSS
 		link(rel='stylesheet', type='text/css', href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
 		link(rel='stylesheet' type='text/css' href='/css/main.css')
+		link(rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs/dt-1.10.9,b-1.0.3/datatables.min.css")
 		link(rel='shortcut icon' type='image/x-icon' href='/images/favicon.ico')
 		link(href='//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css' rel='stylesheet')
 		
@@ -25,7 +26,10 @@ html
 					p Search:
 						input(type="search" id="search" placeholder="Zipcode")
 
-		h1 Election Title Name District 5					
+		if (election)
+			h1(class="title") #{election}
+		else
+			h1(class="title") Generic election
 
 		div(class="navwrapper")
 			nav(class="container")
@@ -50,6 +54,7 @@ html
 		//- Global JavaScript
 		script(type="text/javascript", src='/bower_components/jquery/dist/jquery.min.js')
 		script(type="text/javascript", src='/bower_components/bootstrap/dist/js/bootstrap.min.js')
+		script(type="text/javascript", src="https://cdn.datatables.net/r/bs/dt-1.10.9,b-1.0.3/datatables.min.js")
 		script(type='text/javascript' src='/js/main.js')
 			
 		block localJS
