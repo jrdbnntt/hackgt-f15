@@ -33,7 +33,7 @@ module.exports = (app)->
 	app.get '/signup', app.PublicController.signup
 	app.post '/signup', jsonParser, app.PublicController.signup_submit
 
-	#Referendums
+	# Referendums
 	app.get '/referendums', app.PublicController.referendums
 	
 
