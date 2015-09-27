@@ -8,7 +8,9 @@ html
 		//- Global CSS
 		link(rel='stylesheet', type='text/css', href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
 		link(rel='stylesheet' type='text/css' href='/css/main.css')
+		link(rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs/dt-1.10.9,b-1.0.3/datatables.min.css")
 		link(rel='shortcut icon' type='image/x-icon' href='/images/favicon.ico')
+		link(href='//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css' rel='stylesheet')
 		
 		block localCSS
 		
@@ -16,26 +18,33 @@ html
 		//- Global Header
 		header
 			.container
-				h1(class="col-xs-12 col-sm-8")
+				div.logo.col-xs-12.col-sm-8
 					img(src="images/logo.png")
-				nav(class="col-xs-12 col-sm-10")
+				nav.col-xs-12.col-sm-10
 				
 				.search
-					p Search For More Elections:
-						input(type="text" class="zip_input")
-				
-		//- Body
-		div(class="navwrapper")
-			nav(class="container")
+					p Search:
+						input(type="search" id="search" placeholder="Zipcode")
+
+		if (election)
+			h1.title #{election}
+		else
+			h1.title Generic election
+
+		div.navwrapper
+			nav.container
 				a(href="") Election Info
 				a(href="") Candidates
 				a(href="") Referendums
 				a(href="") Thing
 
-		div(class='container-fluid main')
+
+		//- Body
+		div.container-fluid.main
 			.container
 				block content
 		
+				hr
 		//- Global Footer
 		footer
 			.container
@@ -45,6 +54,7 @@ html
 		//- Global JavaScript
 		script(type="text/javascript", src='/bower_components/jquery/dist/jquery.min.js')
 		script(type="text/javascript", src='/bower_components/bootstrap/dist/js/bootstrap.min.js')
+		script(type="text/javascript", src="https://cdn.datatables.net/r/bs/dt-1.10.9,b-1.0.3/datatables.min.js")
 		script(type='text/javascript' src='/js/main.js')
 			
 		block localJS

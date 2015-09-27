@@ -4,11 +4,11 @@ extend ../indexlayout
 
 block content
 	.container
-		h1(class="headertext slideInLeft")
+		h1.headertext
 			p Showing elections for #{zipcode}
 
 		each election in elections
-			div(class="flatbox container election")
-				p(class="date_wrapper") 
-					span(class="date") #{election.date}
+			div.flatbox.container.election
+				p.date_wrapper
+					span.date #{election.date}
 				p #{election.name}, #{election.level}

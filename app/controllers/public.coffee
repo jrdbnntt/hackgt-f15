@@ -10,20 +10,21 @@ module.exports = (app)->
 				title: 'Home'
 				zipCode: req.session.zipCode
 
-		@index_submit: (req, res)->
-			req.session.zipCode = req.body.zipCode
-
-			res.send {}
-
 		@candidateBrowse: (req, res)->
 			testCandidates = [
 				{ name: "John Doe", election: "2016 Presidential Election" }
 				{ name: "Jane Doe", election: "2015 Normaltown Mayoral Election" }
 			]
+			testQuestions = [
+				{ asker: "Alice", text: "How are you today?" }
+				{ asker: "Bob", text: "Do you like pies?" }
+			]
 
 			res.render 'public/candidate',
 				title: 'Candidates'
+				election: req.session.election
 				candidates: testCandidates
+				questions: testQuestions
 
 		@electionBrowse: (req, res)->
 			testElections = [
@@ -34,6 +35,10 @@ module.exports = (app)->
 			res.render 'public/election',
 				title: 'Elections'
 				elections: testElections
+
+		@referendums: (req, res)->
+			res.render 'public/referendums',
+				title: 'Referendums'
 
 		@signin: (req, res)->
 			res.render 'public/signin',
@@ -146,3 +151,46 @@ module.exports = (app)->
 				res.json
 					error: err
 	
+
+		@question: (req, res)->
+			# req.params.electionId gives the electionId
+			# Todo: fetch all questions for the given election
+			# Todo: fetch election info
+			# Todo: fetch all candidates in the given election
+			app.models.Question.list
+				electionId: req.params.electionId
+			.then (questions)->
+				res.render 'public/question',
+					title: 'Question List'
+					questions: questions
+
+		@question_new: (req, res)->
+			# Todo: add the question to the database
+			if !(req.body.asker? && req.body.text?)
+				res.send {"error": "missing parameters"}
+				return
+
+			app.models.Question.create
+				asker: req.body.asker
+				text: req.body.text
+			.then ()->
+				res.send {}
+
+		@question_rate: (req, res)->
+			# Todo: increment/decrement score
+			if !(req.body.questionId? && req.body.upOrDown?)
+				res.send {"error": "missing parameters"}
+				return
+
+			app.models.Question.rate
+				questionId: req.body.questionId
+				upOrDown: req.body.upOrDown
+			.then ()->
+				res.send {}
+
+			res.send {}
+
+		@zip_submit: (req, res)->
+			req.session.zipCode = req.body.zipCode
+
+			res.send {}

@@ -22,6 +22,9 @@ module.exports = (app)->
 	app.get '/home', app.PublicController.index
 	app.get '/index', app.PublicController.index
 
+	# When the user updates their zip code
+	app.post '/zip_submit', jsonParser, app.PublicController.zip_submit
+
 	# Candidate Signin
 	app.get '/signin', app.PublicController.signin
 	app.post '/signin', jsonParser, app.PublicController.signin_submit
@@ -29,6 +32,7 @@ module.exports = (app)->
 	# Candidate Signup
 	app.get '/signup', app.PublicController.signup
 	app.post '/signup', app.PublicController.signup_submit
+
 
 	# Election browser for all
 	app.get '/election', app.PublicController.electionBrowse
@@ -43,8 +47,9 @@ module.exports = (app)->
 	# app.get '/election/:electionId/issue/:issueId', app.PublicController.issueView
 
 	# Election crowdsource question handling
-	# app.post '/election/question/new', jsonParser, app.PublicController.questionNew
-	# app.post '/election/question/rate', jsonParser, app.PublicController.questionRate
+	app.get '/election/:electionId/question', app.PublicController.question
+	app.post '/election/question/new', jsonParser, app.PublicController.question_new
+	app.post '/election/question/rate', jsonParser, app.PublicController.question_rate
 
 	# Election search
 	app.post '/election/dateSearch', jsonParser, app.PublicController.electionDateSearch

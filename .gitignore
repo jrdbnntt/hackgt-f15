@@ -4,4 +4,5 @@ desktop.ini
 node-debug.log
 public/bower_components
 public/img/static
+public/images/static
 .DS_Store
