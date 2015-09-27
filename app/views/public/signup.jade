@@ -106,12 +106,48 @@ block content
 								option(value=county disabled hidden data-state=state)= county
 			
 			.form-group
-				label.control-label.col-md-3 Found Dates
+				label.control-label.col-md-3 Election Ballot
 				.col-md-9
 					select.form-control(name='electionDate' disabled)
 						option(selected disabled hidden value='')
 						option(value='-1') Add New Election...
 						
+			.newElection(style='display: none;')
+				.form-group
+					label.control-label.col-md-3 Other Candidates
+					.col-md-9
+						select.form-control(name='numCandidates' required)
+							- var i = 0
+							while i <= 20
+								option(value=i)=i
+								- i += 1
+				
+				.otherCandidates
+					.form-group
+						label.control-label.col-md-3
+						.col-md-4
+							input.form-control(name='cINT-firstName' type='text' placeholder='First Name' required)
+						.col-md-4
+							input.form-control(name='cINT-lastName' type='text' placeholder='Last Name' required)
+				
+				.referendums
+					.form-group
+						label.control-label.col-md-3 Referendums
+						.col-md-9
+							select.form-control(name='numReferendums' required)
+								- var i = 0
+								while i <= 20
+									option(value=i)=i
+									- i += 1
+					
+					.referendums-list
+						.form-group
+							label.control-label.col-md-3
+							.col-md-3
+								input.form-control(name='rINT-name' type='text' placeholder='Title' required)
+							.col-md-6
+								textarea.form-control(name='rINT-description' rows='2' placeholder='Description' style='resize: vertical;' required)
+			
 			
 			.form-group.text-center
 				button.btn.btn-default(type='submit') Sign Up

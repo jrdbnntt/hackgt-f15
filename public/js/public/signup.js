@@ -96,8 +96,8 @@ var refreshState = function() {
 var originalDateOptions = ei.date.html();
 var refreshDates = function() {
 	var electionData = {
-		typeId: ei.type.val().trim(),
-		levelId: ei.level.val().trim(),
+		typeId: ei.type.val(),
+		levelId: ei.level.val(),
 		state: $.trim(ei.state.val()),
 		county: $.trim(ei.county.val())
 	};
@@ -151,7 +151,6 @@ var refreshDates = function() {
 	
 };
 
-
 ei.level.change(function(ev) {
 	refreshState();
 	refreshDates();
@@ -166,7 +165,91 @@ ei.county.change(function(ev) {
 
 $(document).load(function(ev) {
 	refreshParty();
+	// setNewBallot(false);
 });
+
+
+var newBallot = form.find('.newElection');
+
+
+var nb = {
+	numCandidates: 	newBallot.find('select[name="numCandidates"]'),
+	numReferendums: 	newBallot.find('select[name="numReferendums"]'),
+	candidates: 		newBallot.find('.otherCandidates'),
+	referendums: 		newBallot.find('.referendums-list')
+};
+
+var tmpl = {
+	candidate: nb.candidates.html(),
+	referendum: nb.referendums.html()
+};
+
+
+var refreshCandidates = function() {
+	var num = nb.numCandidates.val();
+	nb.candidates.empty();
+	if(!num) {
+		return;
+	}
+	
+	num = parseInt(num);
+	var i = 0;
+	for(i = 0; i < num; ++i) {
+		nb.candidates.append($(tmpl.candidate.replace(/cINT/g,'c'+i)));
+	}
+};
+var refreshReferendums = function() {
+	var num = nb.numReferendums.val();
+	nb.referendums.empty();
+	if(!num) {
+		return;
+	}
+	
+	num = parseInt(num);
+	var i = 0;
+	for(i = 0; i < num; ++i) {
+		nb.referendums.append($(tmpl.referendum.replace(/rINT/g,'r'+i)));
+	}
+};
+
+nb.numCandidates.change(function(ev) {
+	refreshCandidates();
+});
+nb.numReferendums.change(function(ev) {
+	refreshReferendums();
+});
+
+var setNewBallot = function(status) {
+	if(!status) {
+		newBallot.hide();
+		newBallot.find('input, select').prop({
+			disabled: true,
+			required: false
+		});
+		return;
+	} 
+	
+	newBallot.find('input, select').prop({
+		disabled: false,
+		required: true
+	});
+	
+	refreshCandidates();
+	refreshReferendums();
+	
+	newBallot.show();
+};
+
+
+ei.date.change(function(ev) {
+	if(ei.date.val() == '-1') {
+		setNewBallot(true);
+	} else {
+		setNewBallot(false);
+	}
+});
+
+
 
 form.submit(function(ev){
 	ev.preventDefault();
