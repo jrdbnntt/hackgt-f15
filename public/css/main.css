@@ -25,14 +25,20 @@ header {
 }
 
 /*Logo*/
-header h1 {
+.logo {
   display: inline-block;
   height: inherit;
   color: #F9F8F4;
   font-size: 39px;
 }
-header h1 img {
+.logo img {
   max-width: 100%;
+}
+
+header h1 {
+  color: #fff;
+  font-family: Montserrat, Lato, Arial, sans-serif;
+  background-color: #f0f;
 }
 
 /*Navigation*/
@@ -132,6 +138,8 @@ footer {
 .login-block button:hover {
     background: #ff7b81;
 }
+
+
 /*Specific to Election page*/
 .headertext {
   color: #fff;
