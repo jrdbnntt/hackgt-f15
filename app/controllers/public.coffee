@@ -151,16 +151,16 @@ module.exports = (app)->
 
 		@question_new: (req, res)->
 			# Todo: add the question to the database
-			if !(res.body.asker? && res.body.text?)
-				res.send {"error": "invalid params"}
+			if !(req.body.asker? && req.body.text?)
+				res.send {"error": "missing parameters"}
 				return
 
 			res.send {}
 
 		@question_rate: (req, res)->
 			# Todo: increment/decrement score
-			if !(res.body.qid? || res.body.direction? )
-				res.send {"error": "invalid params"}
+			if !(req.body.qid? && req.body.direction?)
+				res.send {"error": "missing parameters"}
 				return
 
 			res.send {}
