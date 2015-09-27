@@ -33,18 +33,17 @@ module.exports = (app)->
 	app.get '/signup', app.PublicController.signup
 	app.post '/signup', app.PublicController.signup_submit
 
-
 	# Election browser for all
 	app.get '/election', app.PublicController.electionBrowse
 
 	# Election description for single
-	# app.get '/election/:electionId', app.PublicController.electionView
+	app.get '/election/:electionId', app.PublicController.electionView
 
 	# Election issue browser
-	# app.get '/election/:electionId/issue', app.PublicController.issueBrowse
+	app.get '/election/:electionId/issue', app.PublicController.issueBrowse
 
 	# Election issue view single
-	# app.get '/election/:electionId/issue/:issueId', app.PublicController.issueView
+	app.get '/election/:electionId/issue/:issueId', app.PublicController.issueView
 
 	# Election crowdsource question handling
 	app.get '/election/:electionId/question', app.PublicController.question
