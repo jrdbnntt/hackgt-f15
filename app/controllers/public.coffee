@@ -10,11 +10,6 @@ module.exports = (app)->
 				title: 'Home'
 				zipCode: req.session.zipCode
 
-		@zip_submit: (req, res)->
-			req.session.zipCode = req.body.zipCode
-
-			res.send {}
-
 		@candidateBrowse: (req, res)->
 			testCandidates = [
 				{ name: "John Doe", election: "2016 Presidential Election" }
@@ -138,3 +133,20 @@ module.exports = (app)->
 					, (err)->
 						res.json
 							error: err
+
+		@question: (req, res)->
+			# req.params.electionId gives the electionId
+			testQuestions = [
+				{ asker: 'Alice', score: 1000, qid: 1, text: "What's up?" }
+				{ asker: 'Bob', score: 500, qid: 5, text: "Do you like pizza?" }
+				{ asker: 'Charlie', score: 250, qid: 10, text: "How is life?" }
+			]
+
+			res.render 'public/question',
+				title: 'Question List'
+				questions: testQuestions
+
+		@zip_submit: (req, res)->
+			req.session.zipCode = req.body.zipCode
+
+			res.send {}
