@@ -7,12 +7,13 @@ block content
 			input(type="button" value="Ask")
 
 	each question in questions
-		div(class="votebox")
-			// upvote
-			p ^
-			// score
-			p #{question.score}
-			// downvote
-			p v
+		div.questionbox
+			div.votebox
+				// upvote
+				div.uparrow ^
+				// score
+				div.questionscore #{question.score}
+				// downvote
+				div.downarrow v
 
-		p #{question.text}
+			p #{question.text}
