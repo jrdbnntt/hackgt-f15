@@ -1,0 +1,25 @@
+extend ../layout
+
+block localJS
+	script(type='text/javascriot' src='/js/public/signin.js')
+	link(href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css')
+
+block content
+	form.form-horizontal
+		fieldset
+
+			legend Election Information
+
+			h1 Statistics
+
+			h1 Candidates
+
+			h1 Crowd Source Questions
+			.control-group
+				label.form-control(for='email') Question
+				.controls
+					input#question(placeholder='question' type='text' name='question' required)
+						
+			.control-group
+				.controls
+					button.btn.login-block(type='submit') Ask
