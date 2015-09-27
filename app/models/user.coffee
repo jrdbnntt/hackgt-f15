@@ -23,17 +23,18 @@ module.exports = (app)->
 					userId = null
 					qcnt = 0
 					
+					if err
+						dfd.reject err
+						return
+					
 					# Save new user
 					con = app.db.newMultiCon()
-					con.query 'INSERT INTO ? (?,?,?) VALUES (?,?,?); SELECT LAST_INSERT_ID() AS userId;', [
-						table.name
+					con.query 'INSERT INTO User ('+table.col.roleId+', '+table.col.email+', '+table.col.password+') VALUES (?, ?, ?); SELECT LAST_INSERT_ID() AS userId;', [						
+
 						
-						table.col.roleId
-						table.col.email
-						table.col.password
 						
-						roleId
-						email
+						data.roleId
+						data.email
 						hash
 					]
 					.on 'result', (res)->

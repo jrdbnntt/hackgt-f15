@@ -6,7 +6,7 @@ table =
 	name: 'Party' 
 	col:
 		id: 'id'
-		name: 'roleId'
+		name: 'name'
 
 module.exports = (app)->
 	class app.models.Party

@@ -10,6 +10,7 @@ html
 		link(rel='stylesheet' type='text/css' href='/css/main.css')
 		link(rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs/dt-1.10.9,b-1.0.3/datatables.min.css")
 		link(rel='shortcut icon' type='image/x-icon' href='/images/favicon.ico')
+		link(href='//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css' rel='stylesheet')
 		
 		block localCSS
 		
@@ -17,21 +18,21 @@ html
 		//- Global Header
 		header
 			.container
-				div(class="logo col-xs-12 col-sm-8")
+				div.logo.col-xs-12.col-sm-8
 					img(src="images/logo.png")
-				nav(class="col-xs-12 col-sm-10")
+				nav.col-xs-12.col-sm-10
 				
 				.search
-					p Search For More Elections:
-						input(type="search" class="zip_input" id="search" placeholder="Search..")
+					p Search:
+						input(type="search" id="search" placeholder="Zipcode")
 
 		if (election)
-			h1(class="title") #{election}
+			h1.title #{election}
 		else
-			h1(class="title") Generic election
+			h1.title Generic election
 
-		div(class="navwrapper")
-			nav(class="container")
+		div.navwrapper
+			nav.container
 				a(href="") Election Info
 				a(href="") Candidates
 				a(href="") Referendums
@@ -39,7 +40,7 @@ html
 
 
 		//- Body
-		div(class='container-fluid main')
+		div.container-fluid.main
 			.container
 				block content
 		

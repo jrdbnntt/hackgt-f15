@@ -16,6 +16,7 @@ fs = require 'fs-extra'
 
 # Local lib
 autoload = require '../lib/autoload'
+loadData = require '../lib/loadData'
 
 module.exports = (app)->
 	# Save module references
@@ -31,7 +32,7 @@ module.exports = (app)->
 	app.dirs.base =  app.path.resolve __dirname + '/..'
 	app.dirs.static = app.dirs.base + '/public'
 	app.dirs.views = app.dirs.base + '/app/views'
-		
+	
 	# Setup project
 	dotenv.load()
 	app.env = process.env
@@ -100,3 +101,4 @@ module.exports = (app)->
 	app.models = {}
 	autoload 'app/models', app
 	autoload 'app/controllers', app
+	loadData app

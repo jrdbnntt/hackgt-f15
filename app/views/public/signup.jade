@@ -1,53 +1,163 @@
 extend ../layout
 
-block localJS
-	script(type='text/javascriot' src='/js/public/signup.js')
+block localCSS
 	link(href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css')
 
+block localJS
+	script(type='text/javascript' src='/js/public/signup.js')
+
 block content
-	p Look at the signup page!
-
-	form.form-horizontal
-		fieldset
-			legend Sign Up
-
-			.control-group
-				label.form-control(for='') Full Name
-				.controls
-					input(type='text' name='name' required)
-
-			.control-group
-				label.form-control(for='email') Photo
-				.controls
-					input(type='file' name='photo' required)
-
-			.control-group
-				label.form-control(for='') Autobiography
-				.controls
-					input(textarea rows="5" cols="15" required)
+	form#signup.form-horizontal
+		fieldset.col-md-offset-2.col-md-8
+			h1 Candidate Sign Up
+			
+			h3 Account Information
+			
+			.form-group
+				label.control-label.col-md-3 Email
+				.col-md-9
+					input.form-control(type='email' name='email' required)
+			.form-group
+				label.control-label.col-md-3 Password
+				.col-md-9
+					input.form-control(type='password' name='password' required)
+			.form-group
+				label.control-label.col-md-3 Confirm Password
+				.col-md-9
+					input.form-control(type='password' name='passwordConfirm' required)
+			
+			
+			h3 Personal Information
 						
-			.control-group
-				label.form-control(for='email') Email
-				.controls
-					input(type='email' name='email' required)
-
-			.control-group
-				label.form-control(for='email') Password
-				.controls
-					input(type='password' name='password' required)
-
-			.control-group
-				label.form-control(for='') Date of birth
-				.controls
-					input(type='date' name='date' required)
-
-			.control-group
-				label.form-control Political Party
-				.controls
-					select(name='party')
+			.form-group
+				label.control-label.col-md-3 First Name
+				.col-md-9
+					input.form-control(type='text' name='firstName' required)
+			.form-group
+				label.control-label.col-md-3 Last Name
+				.col-md-9
+					input.form-control(type='text' name='lastName' required)
+			.form-group
+				label.control-label.col-md-3 Date of Birth
+				.col-md-9
+					input.form-control(type='date' name='dob' required)
+			.form-group
+				label.control-label.col-md-3 Profile Picture
+				.col-md-9
+					input.form-control(type='file' name='profilePhoto' required)
+			.form-group
+				label.control-label.col-md-3 Political Party
+				.col-md-9
+					select.form-control(name='party' required)
+						option(selected disabled hidden value='')
 						option(value='-1') Add new party...
+						
 						for party in parties
 							option(value=party.id)= party.name
-			.control-group
-				.controls
-					button.btn(type='submit') Sign Ups
+			.form-group(style='display: none;')
+				label.control-label.col-md-3 
+				.col-md-9
+					input.form-control(type='text' name='newParty' placeholder='Your Party')
+			.form-group
+				label.control-label.col-md-3 About You
+				.col-md-9
+					textarea.form-control(name='about' rows='5' cols='15' style='resize: vertical;' required)
+			
+			
+			
+			h3 Participating Election
+			
+			.form-group
+				label.control-label.col-md-3 Type
+				.col-md-9
+					select.form-control(name='electionType' required)
+						option(selected disabled hidden value='')
+						
+						for type in data.electionTypes
+							option(value=type.id)= type.name
+			
+			.form-group
+				label.control-label.col-md-3 Level
+				.col-md-9
+					select.form-control(name='electionLevel' required)
+						option(selected disabled hidden value='')
+						
+						for level in data.govLevels
+							option(value=level.id)= level.name
+			
+			.form-group(style='display: none;')
+				label.control-label.col-md-3 State
+				.col-md-9
+					select.form-control(name='electionState')
+						option(selected disabled hidden value='')
+						
+						for state in data.states.titleCase
+							option(value=state.abbreviation)= state.name
+			
+			.form-group(style='display: none;')
+				label.control-label.col-md-3 County
+				.col-md-9
+					select.form-control(name='electionCounty')
+						option(selected disabled hidden value='')
+						
+						- var i = 0
+						each stateGroup, state in data.countiesByState
+							for county in stateGroup
+								option(value=county disabled hidden data-state=state)= county
+			
+			.form-group
+				label.control-label.col-md-3 Election Ballot
+				.col-md-9
+					select.form-control(name='electionDate' disabled)
+						option(selected disabled hidden value='')
+						option(value='-1') Add New Election...
+						
+			.newElection(style='display: none;')
+				.form-group
+					label.control-label.col-md-3 Office Position
+					.col-md-9
+						input.form-control(type='text' name='position' required)
+							
+				.form-group
+					label.control-label.col-md-3 Poll Date
+					.col-md-9
+						input.form-control(type='date' name='newDate' required)
+				
+				.form-group
+					label.control-label.col-md-3 Other Candidates
+					.col-md-9
+						select.form-control(name='numCandidates' required)
+							- var i = 0
+							while i <= 20
+								option(value=i)=i
+								- i += 1
+				
+				.otherCandidates
+					.form-group
+						label.control-label.col-md-3
+						.col-md-4
+							input.form-control(name='cINT-firstName' type='text' placeholder='First Name' required)
+						.col-md-4
+							input.form-control(name='cINT-lastName' type='text' placeholder='Last Name' required)
+				
+				.referendums
+					.form-group
+						label.control-label.col-md-3 Referendums
+						.col-md-9
+							select.form-control(name='numReferendums' required)
+								- var i = 0
+								while i <= 20
+									option(value=i)=i
+									- i += 1
+					
+					.referendums-list
+						.form-group
+							label.control-label.col-md-3
+							.col-md-3
+								input.form-control(name='rINT-name' type='text' placeholder='Title' required)
+							.col-md-6
+								textarea.form-control(name='rINT-description' rows='2' placeholder='Description' style='resize: vertical;' required)
+			
+			
+			.form-group.text-center
+				button.btn.btn-default(type='submit') Sign Up

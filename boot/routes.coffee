@@ -31,11 +31,8 @@ module.exports = (app)->
 
 	# Candidate Signup
 	app.get '/signup', app.PublicController.signup
-	app.post '/signup', jsonParser, app.PublicController.signup_submit
+	app.post '/signup', app.PublicController.signup_submit
 
-	# Referendums
-	app.get '/referendums', app.PublicController.referendums
-	
 
 	# Election browser for all
 	app.get '/election', app.PublicController.electionBrowse
@@ -50,9 +47,12 @@ module.exports = (app)->
 	# app.get '/election/:electionId/issue/:issueId', app.PublicController.issueView
 
 	# Election crowdsource question handling
-	# app.post '/election/question/new', jsonParser, app.PublicController.questionNew
-	# app.post '/election/question/rate', jsonParser, app.PublicController.questionRate
+	app.get '/election/:electionId/question', app.PublicController.question
+	app.post '/election/question/new', jsonParser, app.PublicController.question_new
+	app.post '/election/question/rate', jsonParser, app.PublicController.question_rate
 
+	# Election search
+	app.post '/election/dateSearch', jsonParser, app.PublicController.electionDateSearch
 
 
 	# Candidate Browser

@@ -10,11 +10,6 @@ module.exports = (app)->
 				title: 'Home'
 				zipCode: req.session.zipCode
 
-		@zip_submit: (req, res)->
-			req.session.zipCode = req.body.zipCode
-
-			res.send {}
-
 		@candidateBrowse: (req, res)->
 			testCandidates = [
 				{ name: "John Doe", election: "2016 Presidential Election" }
@@ -72,47 +67,45 @@ module.exports = (app)->
 			
 			app.models.Party.getAll()
 			.then (parties)->	
-				console.log(parties)
 				res.render 'public/signup',
 					title: title
-					parites: parites
+					parties: parties
 			, (err)->
 				res.render 'public/signup',
 					title: title
-					parites: []
+					parties: []
 		
 		@signup_submit: (req, res)->
 			input = null
-			form = new app.formiddable.IncomingForm()
+			form = new app.formidable.IncomingForm()
 			form.parse req, (err, fields, files)->
 				input = fields
 				if err
 					res.json
-						err: err
+						error: err
 					return
 			
 			form.on 'end', (fields, files)->
 				srcPath = this.openedFiles[0].path
 				fileName = app.models.User.genFileName this.openedFiles[0].name
-				dstLocation = app.dirs.static + '/img/static'
+				dstLocation = app.dirs.static + '/images/static/'
 				app.fs.move srcPath, dstLocation + fileName
 				, (err)->
 					if err
 						res.json
 							error: 'Problem moving image'
 						return
-				
-					if !(input.partyId? || input.partyName?) ||
+									
+					if !(input.partyId? || input.newParty?) ||
 					!(input.electionId? || input.electionData?) ||
 					!input.email? ||
 					!input.password? ||
 					!input.firstName? ||
 					!input.lastName? ||
 					!input.dob? ||
-					!input.about? ||
-					!this.openedFiles.length == 0
+					!input.about?
 						res.json
-							err: 'Invalid parameters'
+							error: 'Invalid parameters'
 						return
 					
 					# Create the user, then the candidate
@@ -130,12 +123,78 @@ module.exports = (app)->
 							about: input.about
 							pictureUrl: fileName
 						.then (candidateId)->
+							
 							console.log 'Candidate created: ' + input.fileName +' '+ input.lastName
 							res.json
 								candidateId: candidateId
 						, (err)->
+							console.log 'candidate crash on save: ' + err
 							res.json
+								error: err
 					, (err)->
+						console.log 'user crash on save: ' + err
 						res.json
 							error: err
+<<<<<<< HEAD
 
+=======
+					
+		@electionDateSearch: (req, res)->
+			if !req.body.typeId? ||
+			!req.body.levelId?
+				res.json
+					error: 'Invalid params'
+			
+			app.models.Election.getDateByInfo req.body
+			.then (elections)->
+				console.log elections
+				res.json
+					elections: elections
+			, (err)->
+				res.json
+					error: err
+	
+
+		@question: (req, res)->
+			# req.params.electionId gives the electionId
+			# Todo: fetch all questions for the given election
+			# Todo: fetch election info
+			# Todo: fetch all candidates in the given election
+			app.models.Question.list
+				electionId: req.params.electionId
+			.then (questions)->
+				res.render 'public/question',
+					title: 'Question List'
+					questions: questions
+
+		@question_new: (req, res)->
+			# Todo: add the question to the database
+			if !(req.body.asker? && req.body.text?)
+				res.send {"error": "missing parameters"}
+				return
+
+			app.models.Question.create
+				asker: req.body.asker
+				text: req.body.text
+			.then ()->
+				res.send {}
+
+		@question_rate: (req, res)->
+			# Todo: increment/decrement score
+			if !(req.body.questionId? && req.body.upOrDown?)
+				res.send {"error": "missing parameters"}
+				return
+
+			app.models.Question.rate
+				questionId: req.body.questionId
+				upOrDown: req.body.upOrDown
+			.then ()->
+				res.send {}
+
+			res.send {}
+
+		@zip_submit: (req, res)->
+			req.session.zipCode = req.body.zipCode
+
+			res.send {}
+>>>>>>> 54d17bc4a20e15fdd401a2614e9da4854c36789f
