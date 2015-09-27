@@ -24,6 +24,8 @@ module.exports = (app)->
 			return dfd.promise
 
 		@list: (data)->
+			dfd = app.Q.defer()
+			
 			# data.electionId
 			setTimeout ()->
 				testQuestions = [
@@ -34,6 +36,7 @@ module.exports = (app)->
 				dfd.resolve(testQuestions)
 			, 50
 			
+			return dfd.promise
 		
 		@rate: (data)->
 			dfd = app.Q.defer()

@@ -139,15 +139,12 @@ module.exports = (app)->
 			# Todo: fetch all questions for the given election
 			# Todo: fetch election info
 			# Todo: fetch all candidates in the given election
-			testQuestions = [
-				{ asker: 'Alice', score: 1000, qid: 1, text: "What's up?" }
-				{ asker: 'Bob', score: 500, qid: 5, text: "Do you like pizza?" }
-				{ asker: 'Charlie', score: 250, qid: 10, text: "How is life?" }
-			]
-
-			res.render 'public/question',
-				title: 'Question List'
-				questions: testQuestions
+			app.models.Question.list
+				electionId: req.params.electionId
+			.then (questions)->
+				res.render 'public/question',
+					title: 'Question List'
+					questions: questions
 
 		@question_new: (req, res)->
 			# Todo: add the question to the database
@@ -155,13 +152,23 @@ module.exports = (app)->
 				res.send {"error": "missing parameters"}
 				return
 
-			res.send {}
+			app.models.Question.create
+				asker: req.body.asker
+				text: req.body.text
+			.then ()->
+				res.send {}
 
 		@question_rate: (req, res)->
 			# Todo: increment/decrement score
-			if !(req.body.qid? && req.body.direction?)
+			if !(req.body.questionId? && req.body.upOrDown?)
 				res.send {"error": "missing parameters"}
 				return
+
+			app.models.Question.rate
+				questionId: req.body.questionId
+				upOrDown: req.body.upOrDown
+			.then ()->
+				res.send {}
 
 			res.send {}
 
